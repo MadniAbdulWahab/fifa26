@@ -85,6 +85,9 @@ function DateList({
     );
   }
 
+  const jumpToCurrent = () =>
+    anchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   return (
     <div className="space-y-4">
       {days.map(([key, dayMatches]) => (
@@ -106,7 +109,33 @@ function DateList({
           ))}
         </section>
       ))}
+
+      {anchorId && <JumpToCurrentButton onClick={jumpToCurrent} live={hasLive} />}
     </div>
+  );
+}
+
+/** Floating, frosted-glass button that scrolls back to the live / next match. */
+function JumpToCurrentButton({
+  onClick,
+  live,
+}: {
+  onClick: () => void;
+  live: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="Jump to current match"
+      title="Jump to today’s match"
+      className="fixed bottom-20 right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-white/30 text-xl shadow-lg ring-1 ring-white/40 backdrop-blur-md transition-transform hover:scale-110 active:scale-95 dark:bg-white/10 dark:ring-white/20 sm:bottom-6"
+    >
+      <span aria-hidden>⚽</span>
+      {live && (
+        <span className="absolute right-0 top-0 h-3 w-3 animate-pulse-live rounded-full bg-red-500 ring-2 ring-slate-50 dark:ring-slate-950" />
+      )}
+    </button>
   );
 }
 

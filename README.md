@@ -1,12 +1,14 @@
 # World Cup 2026 — companion app
 
 A fast, installable (PWA) web app for the FIFA World Cup 2026: fixtures in your
-local time, group standings with W/D/L, Monte-Carlo **advancement & title
-odds**, an auto-seeding knockout **bracket**, and follow-your-team favorites
-with kickoff reminders.
+local time with a clickable **match detail page**, group standings with W/D/L,
+Monte-Carlo **advancement & title odds**, an auto-seeding knockout **bracket**,
+real country flags, and follow-your-team favorites with kickoff reminders.
 
 > Works out of the box with bundled sample data — no API key required. Flip a
 > single environment variable to switch to live results.
+
+**Live:** https://madniabdulwahab.github.io/fifa26/ (deployed via GitHub Pages).
 
 ### Documentation
 - **[ABOUT.md](ABOUT.md)** — full description of every feature and how it works.
@@ -106,9 +108,25 @@ Any static host works (the build output is in `dist/`):
 npm run build
 ```
 
-- **Vercel / Netlify:** import the repo, build command `npm run build`, output
-  `dist`. Add a SPA rewrite (all routes → `/index.html`) and, for live data, a
-  serverless proxy + the `VITE_*` env vars.
+### GitHub Pages (current setup)
+
+This repo auto-deploys to **https://madniabdulwahab.github.io/fifa26/** on every
+push to `main` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+What makes a sub-path SPA work on Pages:
+
+- `vite.config.ts` sets `base: '/fifa26/'` for the build (dev stays at `/`).
+- The router `basename` comes from `import.meta.env.BASE_URL` (`src/main.tsx`).
+- The workflow copies `index.html → 404.html` so deep-link refreshes don't 404.
+
+One-time setup: the repo must be **Public** (free Pages), and **Settings → Pages
+→ Source: GitHub Actions**. For a fork under a different repo name, change the
+`base` in `vite.config.ts`.
+
+### Vercel / Netlify (alternative)
+
+Import the repo, build command `npm run build`, output `dist`. Add a SPA rewrite
+(all routes → `/index.html`) and, for live data, a serverless proxy + the
+`VITE_*` env vars. Served from root, so no base-path change needed.
 
 ## License
 
