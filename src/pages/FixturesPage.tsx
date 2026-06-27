@@ -5,7 +5,7 @@ import { MatchCard } from '@/components/MatchCard';
 import { StandingsTable } from '@/components/StandingsTable';
 import { dayKey, formatDay, germanTimeZoneLabel } from '@/lib/datetime';
 import { findAnchorId, isFinished, isLiveNow } from '@/lib/matchTime';
-import type { GroupStandings, Match } from '@/domain/types';
+import type { GroupId, GroupStandings, Match } from '@/domain/types';
 
 type Tab = 'all' | 'group' | 'knockout';
 
@@ -40,9 +40,11 @@ export function FixturesPage() {
         </button>
       </div>
 
-      <p className="-mt-2 text-xs text-slate-400 dark:text-slate-500">
-        🕒 All times shown in German time ({germanTimeZoneLabel()})
-      </p>
+      {tab !== 'group' && (
+        <p className="-mt-2 text-xs text-slate-400 dark:text-slate-500">
+          🕒 All times shown in German time ({germanTimeZoneLabel()})
+        </p>
+      )}
 
       {tab === 'group' ? (
         <GroupsView standings={standings} matches={matches} isFav={isFav} />
@@ -116,7 +118,9 @@ function DateList({
         </section>
       ))}
 
-      {anchorId && <JumpToCurrentButton onClick={jumpToCurrent} live={hasLive} />}
+      {anchorId && (
+        <JumpToCurrentButton onClick={jumpToCurrent} live={hasLive} />
+      )}
     </div>
   );
 }
@@ -155,8 +159,38 @@ function GroupsView({
   matches: Match[];
   isFav: (m: Match) => boolean;
 }) {
-  // Scroll to top whenever this tab is opened.
-  useScrollToAnchor('group', standings.length > 0, true);
+  const groups = useMemo(
+    () => standings.map((group) => group.group),
+    [standings],
+  );
+  const [selectedGroup, setSelectedGroup] = useState<GroupId | undefined>(
+    groups[0],
+  );
+
+  useEffect(() => {
+    if (groups.length === 0) return;
+    if (!selectedGroup || !groups.includes(selectedGroup)) {
+      setSelectedGroup(groups[0]);
+    }
+  }, [groups, selectedGroup]);
+
+  const group =
+    standings.find((standing) => standing.group === selectedGroup) ??
+    standings[0];
+
+  const groupMatches = useMemo(
+    () =>
+      group
+        ? matches
+            .filter((m) => m.stage === 'group' && m.group === group.group)
+            .filter(isFav)
+            .sort((a, b) => a.kickoff.localeCompare(b.kickoff))
+        : [],
+    [group, matches, isFav],
+  );
+
+  // Place each selected group at the top the first time it is opened.
+  useScrollToAnchor(`group-${group?.group ?? 'none'}`, Boolean(group), true);
 
   if (standings.length === 0) {
     return (
@@ -167,23 +201,62 @@ function GroupsView({
   }
 
   return (
-    <div className="space-y-6">
-      {standings.map((group) => {
-        const groupMatches = matches
-          .filter((m) => m.stage === 'group' && m.group === group.group)
-          .filter(isFav)
-          .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
-        return (
-          <section key={group.group} className="space-y-2">
-            <StandingsTable group={group} />
-            <div className="space-y-2">
-              {groupMatches.map((m) => (
-                <MatchCard key={m.id} match={m} />
-              ))}
-            </div>
-          </section>
-        );
-      })}
+    <div className="space-y-4">
+      <GroupSelector
+        groups={groups}
+        selectedGroup={group?.group}
+        onSelect={setSelectedGroup}
+      />
+
+      {group && (
+        <section className="space-y-2">
+          <StandingsTable group={group} />
+          <div className="space-y-2">
+            {groupMatches.length > 0 ? (
+              groupMatches.map((m) => <MatchCard key={m.id} match={m} />)
+            ) : (
+              <p className="card p-4 text-center text-sm text-slate-500">
+                No matches to show for Group {group.group}.
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
+
+function GroupSelector({
+  groups,
+  selectedGroup,
+  onSelect,
+}: {
+  groups: GroupId[];
+  selectedGroup: GroupId | undefined;
+  onSelect: (group: GroupId) => void;
+}) {
+  return (
+    <div className="relative grid grid-cols-6 gap-x-1 gap-y-2 rounded-lg bg-slate-200/60 p-0.5 dark:bg-slate-800 sm:grid-cols-12 sm:gap-y-1">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-2 right-2 top-1/2 h-px -translate-y-1/2 bg-slate-300/70 dark:bg-slate-700 sm:hidden"
+      />
+      {groups.map((group) => (
+        <button
+          key={group}
+          type="button"
+          onClick={() => onSelect(group)}
+          aria-label={`Show Group ${group}`}
+          aria-pressed={selectedGroup === group}
+          className={`relative z-10 flex h-8 items-center justify-center rounded-md text-xs font-bold transition-colors ${
+            selectedGroup === group
+              ? 'bg-white text-brand shadow-sm dark:bg-slate-700'
+              : 'text-slate-500 hover:bg-white/60 dark:hover:bg-slate-700/60'
+          }`}
+        >
+          {group}
+        </button>
+      ))}
     </div>
   );
 }

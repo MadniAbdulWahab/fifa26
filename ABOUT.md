@@ -43,7 +43,7 @@ are selectable alternatives.
 - A **pinned filter bar** (stays fixed while scrolling): **All / Groups /
   Knockouts** tabs and a **Favorites-only** toggle. The **Groups** tab shows each
   group's standings table followed by its matches (distinct from the date-ordered
-  All view).
+  All view), with A-L group buttons so users can jump straight to one group.
 - A floating **frosted-glass football button** (bottom-right) jumps you back to
   the live / next match from anywhere in the list.
 - **Tap any match** to open its detail page (see below).
@@ -169,10 +169,10 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
   a group-stage pairing schedule. Fully offline and deterministic, but no scores.
 - **Match-feed overlay:** supplies per-match goal scorers + live commentary on
   the match page, since football-data's free tier omits them. Lives in
-  `src/data/events/` as a `MatchEventsSource` (`getMatchFeed → { goals,
-  commentary }`), separate from the main `DataSource`. Default **ESPN** (complete,
-  with commentary, key-less + CORS, undocumented); **TheSportsDB** alternative is
-  documented but partial. Selectable via `VITE_EVENTS_SOURCE`.
+  `src/data/events/` as a `MatchEventsSource`, separate from the main
+  `DataSource`. Default **ESPN** (complete, with commentary, key-less + CORS,
+  undocumented); **TheSportsDB** alternative is documented but partial.
+  Selectable via `VITE_EVENTS_SOURCE`.
 
 ### Deployment
 

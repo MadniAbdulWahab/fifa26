@@ -84,10 +84,11 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   NotificationButton).
 - `pages/` — routed screens: Fixtures, Standings, Bracket, Team
   (`/team/:id`), **Match** (`/match/:id`, the match detail page), Favorites.
-  `FixturesPage` holds the All/Groups/Knockouts tabs, the today/next auto-scroll
-  (`useScrollToAnchor` — anchors to the live/next **match card** on first visit
-  per tab, then **restores the prior scroll position** when you return from a
-  match so it doesn't jerk back to "now"), and a floating "jump to current match"
+  `FixturesPage` holds the All/Groups/Knockouts tabs, the Groups A-L selector,
+  the today/next auto-scroll (`useScrollToAnchor` — anchors to the live/next
+  **match card** on first visit per tab, then **restores the prior scroll
+  position** when you return from a match so it doesn't jerk back to "now"), and
+  a floating "jump to current match"
   button. `MatchCard` links to `/match/:id`.
 - `app/`
   - `App.tsx` — layout + routes + loading/error states; `ScrollToTopOnNavigate`
@@ -129,7 +130,7 @@ recompute heavy derived state themselves.
 - Favorites are **device-local** (`localStorage`, key `wc26:favorites`) — no
   accounts/backend, not synced across devices.
 - **Goal scorers + commentary** come from the `data/events/` overlay, fetched
-  per-match on the match page — *not* from the main `DataSource`. Default is ESPN
+  per-match on the match page — _not_ from the main `DataSource`. Default is ESPN
   (complete, with live commentary) but it's an **undocumented** API — isolate all
   ESPN shape knowledge in `EspnEventsSource`/`espnTypes.ts` and fail soft (empty
   feed). `thesportsdb` data is partial; `none` disables. The match page's
