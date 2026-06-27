@@ -87,12 +87,18 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
         groupForTeam(away.team.displayName))
       : undefined;
 
+  const minute =
+    status === 'live'
+      ? (e.status?.displayClock || e.status?.type?.shortDetail)
+      : undefined;
+
   return {
     id: e.id,
     stage,
     ...(group ? { group } : {}),
     kickoff: e.date,
     status,
+    ...(minute ? { minute } : {}),
     ...(comp.venue?.fullName ? { venue: comp.venue.fullName } : {}),
     homeId: home.team.id,
     awayId: away.team.id,

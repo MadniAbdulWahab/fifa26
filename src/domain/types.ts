@@ -46,6 +46,8 @@ export interface Match {
   /** Kickoff time as an ISO-8601 string in UTC. */
   kickoff: string;
   status: MatchStatus;
+  /** Live clock label while in progress, e.g. "72'" or "HT" (when available). */
+  minute?: string;
   venue?: string;
   homeId: TeamId;
   awayId: TeamId;

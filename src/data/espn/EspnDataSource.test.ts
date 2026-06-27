@@ -99,6 +99,18 @@ describe('mapEspnEvent', () => {
     expect(m.awayGoals).toBeNull();
   });
 
+  it('carries the live clock minute only while in progress', () => {
+    const liveM = mapEspnEvent(
+      event({
+        status: { displayClock: "72'", type: { state: 'in' } },
+      }),
+    )!;
+    expect(liveM.status).toBe('live');
+    expect(liveM.minute).toBe("72'");
+    // Finished/scheduled carry no live minute.
+    expect(mapEspnEvent(event())!.minute).toBeUndefined();
+  });
+
   it('omits group for knockout matches', () => {
     const m = mapEspnEvent(
       event({ season: { slug: 'round-of-16' } }),

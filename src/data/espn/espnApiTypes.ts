@@ -21,9 +21,13 @@ export interface EspnApiCompetition {
 }
 
 export interface EspnApiStatus {
+  /** Running match clock while live, e.g. "72'". */
+  displayClock?: string;
   type?: {
     /** "pre" | "in" | "post" */
     state?: string;
+    /** Short human label, e.g. "72'", "HT", "FT". */
+    shortDetail?: string;
   };
 }
 

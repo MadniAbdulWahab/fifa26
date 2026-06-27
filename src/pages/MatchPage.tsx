@@ -84,7 +84,7 @@ export function MatchPage() {
               </>
             )}
             {live ? (
-              <StatusBadge status="live" />
+              <StatusBadge status="live" minute={match.minute} />
             ) : played ? (
               <StatusBadge status="finished" />
             ) : null}

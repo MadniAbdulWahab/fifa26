@@ -50,7 +50,7 @@ export function MatchCard({ match }: { match: Match }) {
           {matchStageLabel(match)}
         </span>
         {live ? (
-          <StatusBadge status="live" />
+          <StatusBadge status="live" minute={match.minute} />
         ) : played ? (
           <StatusBadge status={match.status} />
         ) : (
