@@ -12,7 +12,7 @@ export function Nav() {
   return (
     <>
       {/* Top bar */}
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-slate-200 bg-slate-50/80 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
         <div className="flex items-center gap-2">
           <span className="text-xl">🏟️</span>
           <span className="font-bold tracking-tight">World Cup 2026</span>

@@ -18,12 +18,15 @@ function Crest({ team }: { team: Team | undefined }) {
       <img
         src={team.flag}
         alt=""
-        className="h-5 w-5 rounded-sm object-contain"
+        width={24}
+        height={16}
+        className="h-4 w-6 shrink-0 rounded-sm object-cover shadow-sm ring-1 ring-black/5"
         loading="lazy"
       />
     );
   }
-  return <span aria-hidden>{team.flag}</span>;
+  if (team.flag) return <span aria-hidden>{team.flag}</span>;
+  return <span aria-hidden>⚪</span>;
 }
 
 export function TeamBadge({ team, full, link, className }: TeamBadgeProps) {

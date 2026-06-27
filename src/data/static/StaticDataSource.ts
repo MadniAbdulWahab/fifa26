@@ -1,6 +1,7 @@
 import type { DataSource } from '@/data/DataSource';
 import type { Match, Team } from '@/domain/types';
 import { buildKnockoutMatches } from '@/lib/bracket';
+import { flagUrl } from '@/lib/flags';
 import { buildStandings } from '@/lib/standings';
 import { generateGroupMatches } from './schedule';
 import { SEED_TEAMS } from './teams';
@@ -14,7 +15,7 @@ import { SEED_TEAMS } from './teams';
  */
 export class StaticDataSource implements DataSource {
   private readonly teams: Team[] = SEED_TEAMS.map(
-    ({ group: _group, ...team }) => team,
+    ({ group: _group, ...team }) => ({ ...team, flag: flagUrl(team.code) }),
   );
 
   private readonly matches: Match[];

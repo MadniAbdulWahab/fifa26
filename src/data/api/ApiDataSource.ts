@@ -7,6 +7,7 @@ import type {
   Team,
 } from '@/domain/types';
 import { SEED_TEAMS } from '@/data/static/teams';
+import { flagUrl } from '@/lib/flags';
 import type {
   FdMatch,
   FdMatchesResponse,
@@ -63,7 +64,7 @@ function mapTeam(t: FdTeam): Team {
     id: String(t.id),
     name: t.name,
     code,
-    flag: '⚽',
+    flag: flagUrl(code),
     rating: ratingFor(code),
   };
 }

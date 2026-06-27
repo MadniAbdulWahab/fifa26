@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import type { Match } from '@/domain/types';
 import { useTournament } from '@/app/TournamentContext';
 import { formatKickoff } from '@/lib/datetime';
+import { isLiveNow } from '@/lib/matchTime';
 import { matchStageLabel } from '@/lib/labels';
 import { TeamBadge } from './TeamBadge';
 import { FavoriteStar } from './FavoriteStar';
@@ -12,6 +14,7 @@ export function MatchCard({ match }: { match: Match }) {
   const home = getTeam(match.homeId);
   const away = getTeam(match.awayId);
   const played = match.homeGoals !== null && match.awayGoals !== null;
+  const live = isLiveNow(match);
 
   const homeWon =
     played && match.homeGoals! > match.awayGoals!;
@@ -19,18 +22,23 @@ export function MatchCard({ match }: { match: Match }) {
     played && match.awayGoals! > match.homeGoals!;
 
   return (
-    <article className="card flex items-center gap-3 p-3">
+    <Link
+      to={`/match/${match.id}`}
+      className={`card flex items-center gap-3 p-3 transition-colors hover:border-brand/50 ${
+        live ? 'ring-2 ring-red-500 ring-offset-1 ring-offset-transparent' : ''
+      }`}
+    >
       <div className="flex flex-1 flex-col gap-2">
         <TeamRow
           teamId={match.homeId}
-          name={<TeamBadge team={home} full link />}
+          name={<TeamBadge team={home} full />}
           goals={match.homeGoals}
           winner={homeWon}
           played={played}
         />
         <TeamRow
           teamId={match.awayId}
-          name={<TeamBadge team={away} full link />}
+          name={<TeamBadge team={away} full />}
           goals={match.awayGoals}
           winner={awayWon}
           played={played}
@@ -41,7 +49,9 @@ export function MatchCard({ match }: { match: Match }) {
         <span className="text-xs text-slate-500">
           {matchStageLabel(match)}
         </span>
-        {played || match.status === 'live' ? (
+        {live ? (
+          <StatusBadge status="live" />
+        ) : played ? (
           <StatusBadge status={match.status} />
         ) : (
           <span className="text-xs font-medium text-slate-500">
@@ -49,7 +59,7 @@ export function MatchCard({ match }: { match: Match }) {
           </span>
         )}
       </div>
-    </article>
+    </Link>
   );
 }
 

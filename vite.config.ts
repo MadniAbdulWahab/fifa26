@@ -4,7 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'node:path';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => {
+  // Served from a sub-path on GitHub Pages; root in dev / other hosts.
+  const base = command === 'build' ? '/fifa26/' : '/';
+  return {
+  base,
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -34,7 +38,8 @@ export default defineConfig({
         theme_color: '#0f172a',
         background_color: '#0f172a',
         display: 'standalone',
-        start_url: '/',
+        start_url: base,
+        scope: base,
         icons: [
           {
             src: 'pwa-192.png',
@@ -56,6 +61,21 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,json}'],
+        runtimeCaching: [
+          {
+            // Cache country flags so they keep working offline after first view.
+            urlPattern: /^https:\/\/flagcdn\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'flagcdn',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30,
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
     }),
   ],
@@ -63,4 +83,5 @@ export default defineConfig({
     environment: 'node',
     globals: true,
   },
+  };
 });
