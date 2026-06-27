@@ -25,18 +25,7 @@ export interface Team {
 
 /** The twelve first-round groups, A–L. */
 export type GroupId =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'E'
-  | 'F'
-  | 'G'
-  | 'H'
-  | 'I'
-  | 'J'
-  | 'K'
-  | 'L';
+  'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L';
 
 export type MatchStage =
   | 'group'
@@ -63,6 +52,20 @@ export interface Match {
   /** Goals; null until the match has a score. */
   homeGoals: number | null;
   awayGoals: number | null;
+  events?: MatchEvent[];
+  eventSource?: 'official' | 'sample';
+}
+
+export type MatchEventType = 'goal';
+
+export interface MatchEvent {
+  id: string;
+  type: MatchEventType;
+  /** Minute in normal match time, including stoppage as 45+N or 90+N. */
+  minute: string;
+  teamId: TeamId;
+  playerName: string;
+  assistName?: string;
 }
 
 /** A team's accumulated win/draw/loss record. */

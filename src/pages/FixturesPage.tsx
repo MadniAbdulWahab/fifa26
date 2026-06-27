@@ -3,7 +3,7 @@ import { useTournament } from '@/app/TournamentContext';
 import { useFavorites } from '@/hooks/useFavorites';
 import { MatchCard } from '@/components/MatchCard';
 import { StandingsTable } from '@/components/StandingsTable';
-import { dayKey, formatDay } from '@/lib/datetime';
+import { dayKey, formatDay, germanTimeZoneLabel } from '@/lib/datetime';
 import { findAnchorId, isFinished, isLiveNow } from '@/lib/matchTime';
 import type { GroupStandings, Match } from '@/domain/types';
 
@@ -39,6 +39,10 @@ export function FixturesPage() {
           ⭐ Favorites
         </button>
       </div>
+
+      <p className="-mt-2 text-xs text-slate-400 dark:text-slate-500">
+        🕒 All times shown in German time ({germanTimeZoneLabel()})
+      </p>
 
       {tab === 'group' ? (
         <GroupsView standings={standings} matches={matches} isFav={isFav} />
@@ -91,11 +95,7 @@ function DateList({
   return (
     <div className="space-y-4">
       {days.map(([key, dayMatches]) => (
-        <section
-          key={key}
-          ref={key === anchorDay ? anchorRef : undefined}
-          className="scroll-mt-28 space-y-2"
-        >
+        <section key={key} className="space-y-2">
           <h2 className="flex items-center gap-2 py-1 text-sm font-semibold text-slate-500">
             {formatDay(dayMatches[0]!.kickoff)}
             {key === anchorDay && !hasLive && anchorIsUpcoming && (
@@ -105,7 +105,13 @@ function DateList({
             )}
           </h2>
           {dayMatches.map((m) => (
-            <MatchCard key={m.id} match={m} />
+            <div
+              key={m.id}
+              ref={m.id === anchorId ? anchorRef : undefined}
+              className={m.id === anchorId ? 'scroll-mt-28' : undefined}
+            >
+              <MatchCard match={m} />
+            </div>
           ))}
         </section>
       ))}
@@ -182,19 +188,42 @@ function GroupsView({
   );
 }
 
+// Module-level so they survive FixturesPage unmounting (e.g. opening a match):
+// which views have already had their one-time placement, and the last scroll
+// position per view, so returning restores where the user was.
+const placedViews = new Set<string>();
+const savedScrollByView = new Map<string, number>();
+
 /**
- * Returns a ref to attach to the anchor element. On each new view (keyed by
- * `viewKey`) once data is ready, scrolls that element into view — or to the top
- * when `toTop` is set. Won't re-fire on background refetches within a view.
+ * Returns a ref to attach to the anchor element. The **first** time a view
+ * (keyed by `viewKey`) is shown in a session, it places the scroll — to the
+ * anchor match, or to the top when `toTop` is set. On later visits (e.g. after
+ * opening a match and coming back) it **restores the previous scroll position**
+ * instead of jerking back to the current match. Won't re-fire on background
+ * refetches within a view.
  */
 function useScrollToAnchor(viewKey: string, ready: boolean, toTop = false) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const lastView = useRef<string | null>(null);
+
+  // Remember the scroll position for the active view as the user scrolls.
+  useEffect(() => {
+    if (!ready) return;
+    const onScroll = () => savedScrollByView.set(viewKey, window.scrollY);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [viewKey, ready]);
 
   useEffect(() => {
     if (!ready || lastView.current === viewKey) return;
     lastView.current = viewKey;
     requestAnimationFrame(() => {
+      if (placedViews.has(viewKey)) {
+        // Returning to a view we've shown before: restore the user's position.
+        window.scrollTo({ top: savedScrollByView.get(viewKey) ?? 0 });
+        return;
+      }
+      placedViews.add(viewKey);
       if (!toTop && ref.current) {
         ref.current.scrollIntoView({ block: 'start' });
       } else {

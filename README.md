@@ -1,31 +1,34 @@
 # World Cup 2026 — companion app
 
-A fast, installable (PWA) web app for the FIFA World Cup 2026: fixtures in your
-local time with a clickable **match detail page**, group standings with W/D/L,
-Monte-Carlo **advancement & title odds**, an auto-seeding knockout **bracket**,
-real country flags, and follow-your-team favorites with kickoff reminders.
+A fast, installable (PWA) web app for the FIFA World Cup 2026: fixtures in
+**German time (CET/CEST)** with a clickable **match detail page** including
+scorers when event data is available, group standings with W/D/L, Monte-Carlo
+**advancement & title odds**, an auto-seeding knockout **bracket**, real country
+flags, and follow-your-team favorites with kickoff reminders.
 
-> Works out of the box with bundled sample data — no API key required. Flip a
-> single environment variable to switch to live results.
+> Uses **live data from football-data.org** by default. Falls back to a bundled
+> fixture schedule (no API key) if no data source is configured. All match times
+> are shown in German time for every viewer, regardless of their location.
 
 **Live:** https://madniabdulwahab.github.io/fifa26/ (deployed via GitHub Pages).
 
 ### Documentation
+
 - **[ABOUT.md](ABOUT.md)** — full description of every feature and how it works.
 - **[CLAUDE.md](CLAUDE.md)** — codebase map / context for AI assistants.
 - This README — setup, scripts, architecture overview, and deployment.
 
 ## Tech stack
 
-| Concern        | Choice                                  |
-| -------------- | --------------------------------------- |
-| UI             | React 18 + TypeScript + Vite            |
-| Styling        | Tailwind CSS (light/dark)               |
-| Data fetching  | TanStack Query                          |
-| Routing        | React Router                            |
-| Dates/times    | Day.js (UTC → viewer's local timezone)  |
-| Install/offline| vite-plugin-pwa (service worker)        |
-| Tests          | Vitest                                  |
+| Concern         | Choice                                 |
+| --------------- | -------------------------------------- |
+| UI              | React 18 + TypeScript + Vite           |
+| Styling         | Tailwind CSS (light/dark)              |
+| Data fetching   | TanStack Query                         |
+| Routing         | React Router                           |
+| Dates/times     | Day.js (UTC → fixed German timezone, Europe/Berlin) |
+| Install/offline | vite-plugin-pwa (service worker)       |
+| Tests           | Vitest                                 |
 
 ## Quick start
 
@@ -60,22 +63,13 @@ Key design choices:
   domain types. `createDataSource()` picks the implementation from config, so
   adding a new backend (GraphQL, your own API) is a one-file change.
 - **Pure logic in `src/lib`** is fully unit-tested and reused everywhere —
-  e.g. the same Poisson `model.ts` powers both the sample scores and the odds
-  simulation, so they stay statistically consistent.
-- **Deterministic randomness** (`src/lib/rng.ts`) means odds and sample data
-  are stable across reloads and reproducible in tests.
+  e.g. the Poisson `model.ts` powers the odds simulation.
+- **Deterministic randomness** (`src/lib/rng.ts`) means odds are stable across
+  reloads and reproducible in tests.
 
 ## Data sources
 
-### Static (default)
-
-`VITE_DATA_SOURCE=static` uses bundled sample data: 48 teams in 12 groups, a
-generated group stage with plausible scores, and a knockout bracket seeded from
-the resulting standings. Great for development, demos, and offline use.
-
-> The sample draw and results are illustrative, not the official schedule.
-
-### Live API (football-data.org)
+### Live API (default — football-data.org)
 
 ```bash
 cp .env.example .env
@@ -84,21 +78,53 @@ VITE_DATA_SOURCE=api
 VITE_FOOTBALL_DATA_TOKEN=your_free_token   # https://www.football-data.org/client/register
 ```
 
-In development, Vite proxies `/football-data` to `api.football-data.org`
-(see `vite.config.ts`) to avoid CORS.
+The app reads real fixtures, results and scorer events from football-data.org
+(competition `WC`). In development, Vite proxies `/football-data` to
+`api.football-data.org` (see `vite.config.ts`) to avoid CORS, and the token is
+sent as `X-Auth-Token`.
 
-**Production note:** football-data.org does not send CORS headers and a token
-must never ship in client code. Deploy a small serverless proxy that injects
-the token, and point `VITE_FOOTBALL_DATA_BASE` at it.
+**Production:** football-data.org does not send CORS headers, and the token must
+never ship in client code. Deploy the small proxy in [`proxy/`](proxy/README.md)
+(a Cloudflare Worker that injects the token + adds CORS), then set
+`VITE_FOOTBALL_DATA_BASE` to its URL and leave `VITE_FOOTBALL_DATA_TOKEN` empty.
+
+> **Note:** the World Cup competition may not be available on football-data.org's
+> free tier — confirm your token can read `/v4/competitions/WC/matches`.
+
+### Static (offline fallback)
+
+`VITE_DATA_SOURCE=static` (or leaving it unset) uses bundled fixture data: 48
+teams in 12 groups and the group-stage pairing schedule. Useful for development,
+demos and offline use without an API key.
+
+> Static mode is a fixture schedule only: it does not include live scores,
+> official results, lineups or scorer events.
+
+### Goal scorers overlay (TheSportsDB)
+
+football-data.org's free tier has no scorers, so the match page pulls **goal
+scorers + minutes** from [TheSportsDB](https://www.thesportsdb.com) — a free,
+public, CORS-enabled API (no proxy or token needed; the shared key `123` is the
+default). It's queried one match at a time and cached.
+
+```bash
+VITE_EVENTS_SOURCE=thesportsdb   # default; set to "none" to disable
+# VITE_THESPORTSDB_KEY=123       # override with a Patreon key for higher limits
+```
+
+> TheSportsDB timelines are community-sourced and **often incomplete** (a 2–0 may
+> list only one scorer). When fewer goals are present than the final score, the
+> UI shows a **"Partial data"** badge.
 
 ## How the odds work
 
 `src/lib/advancement.ts` runs a Monte-Carlo simulation (default 2000 runs).
 Each run keeps real results, simulates the remaining group games with a Poisson
 goal model based on team ratings, decides the 32 qualifiers (top two per group
-+ eight best third-placed), then plays out a single-elimination bracket.
-Aggregating the runs yields each team's chance to reach the knockouts and to win
-the trophy. It's an approximation for fun — not betting advice.
+
+- eight best third-placed), then plays out a single-elimination bracket.
+  Aggregating the runs yields each team's chance to reach the knockouts and to win
+  the trophy. It's an approximation for fun — not betting advice.
 
 ## Deploy
 

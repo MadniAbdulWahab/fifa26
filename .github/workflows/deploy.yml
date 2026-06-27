@@ -33,6 +33,12 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Live data from football-data.org via the proxy Worker (see proxy/).
+          # Configure these in repo Settings → Secrets and variables → Actions.
+          # Falls back to the bundled static schedule if VITE_DATA_SOURCE is unset.
+          VITE_DATA_SOURCE: ${{ vars.VITE_DATA_SOURCE }}
+          VITE_FOOTBALL_DATA_BASE: ${{ vars.VITE_FOOTBALL_DATA_BASE }}
 
       - name: SPA fallback for client-side routing
         run: cp dist/index.html dist/404.html

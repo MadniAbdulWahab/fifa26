@@ -7,11 +7,11 @@ import { generateGroupMatches } from './schedule';
 import { SEED_TEAMS } from './teams';
 
 /**
- * Offline data source backed by bundled sample data. Needs no API key, works
- * offline, and is fully deterministic — ideal for development and demos.
+ * Offline data source backed by bundled fixture data. Needs no API key, works
+ * offline, and is deterministic — ideal for development and demos.
  *
- * Group matches are generated with sample scores; knockout fixtures are then
- * derived from the resulting standings so the bracket is internally consistent.
+ * Group matches are scheduled only. Knockout fixtures remain placeholders until
+ * real group results are supplied by a live feed or maintained results file.
  */
 export class StaticDataSource implements DataSource {
   private readonly teams: Team[] = SEED_TEAMS.map(

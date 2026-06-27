@@ -49,7 +49,12 @@ function mapStatus(status: string): MatchStatus {
 
 function mapGroup(group: string | null): GroupId | undefined {
   if (!group) return undefined;
-  const letter = group.replace(/[^A-L]/gi, '').toUpperCase();
+  // football-data sends "GROUP_A"; strip the word "group" first, otherwise its
+  // own "G" (which is in A–L) survives and yields "GA", "GB", …
+  const letter = group
+    .replace(/group/gi, '')
+    .replace(/[^A-L]/gi, '')
+    .toUpperCase();
   return (letter || undefined) as GroupId | undefined;
 }
 

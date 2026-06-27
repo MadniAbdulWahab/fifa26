@@ -1,73 +1,86 @@
 import type { GroupId, Match } from '@/domain/types';
-import { simulateScore } from '@/lib/model';
-import { hashString, mulberry32 } from '@/lib/rng';
 import { SEED_TEAMS, type SeedTeam } from './teams';
 
-/** Single round-robin schedule for four teams (indices 0–3). */
-const ROUND_ROBIN: [number, number][][] = [
+/** Standard four-team group pattern after the draw positions are known. */
+const GROUP_PAIRINGS: [number, number][][] = [
   [
     [0, 1],
     [2, 3],
   ],
   [
     [0, 2],
-    [1, 3],
+    [3, 1],
   ],
   [
-    [0, 3],
+    [3, 0],
     [1, 2],
   ],
 ];
 
-/** First kickoff date (UTC) for each matchday. */
-const MATCHDAY_START = ['2026-06-11', '2026-06-16', '2026-06-21'];
+/**
+ * Group-stage dates in UTC, based on the published FIFA schedule-by-group
+ * pattern. Some matchdays span adjacent dates; where exact kickoff slots are
+ * not represented here, we keep the group pairing/date correct and use stable
+ * evening UTC kickoff slots.
+ */
+const GROUP_DATES: Record<GroupId, [string, string, string]> = {
+  A: ['2026-06-11', '2026-06-18', '2026-06-24'],
+  B: ['2026-06-12', '2026-06-18', '2026-06-24'],
+  C: ['2026-06-13', '2026-06-19', '2026-06-24'],
+  D: ['2026-06-12', '2026-06-19', '2026-06-25'],
+  E: ['2026-06-14', '2026-06-20', '2026-06-25'],
+  F: ['2026-06-14', '2026-06-20', '2026-06-25'],
+  G: ['2026-06-15', '2026-06-21', '2026-06-26'],
+  H: ['2026-06-15', '2026-06-21', '2026-06-26'],
+  I: ['2026-06-16', '2026-06-22', '2026-06-26'],
+  J: ['2026-06-16', '2026-06-22', '2026-06-27'],
+  K: ['2026-06-17', '2026-06-23', '2026-06-27'],
+  L: ['2026-06-17', '2026-06-23', '2026-06-27'],
+};
+
 const KICKOFF_HOURS_UTC = [16, 19];
 
 function teamsOfGroup(group: GroupId): SeedTeam[] {
   return SEED_TEAMS.filter((t) => t.group === group);
 }
 
-function kickoff(matchday: number, groupIndex: number, slot: number): string {
-  const base = new Date(`${MATCHDAY_START[matchday]}T00:00:00Z`);
-  base.setUTCDate(base.getUTCDate() + Math.floor(groupIndex / 3));
-  base.setUTCHours(KICKOFF_HOURS_UTC[slot] ?? 16);
-  return base.toISOString();
+function kickoff(group: GroupId, matchday: number, slot: number): string {
+  const day = GROUP_DATES[group][matchday];
+  return `${day}T${String(KICKOFF_HOURS_UTC[slot] ?? 16).padStart(2, '0')}:00:00.000Z`;
 }
 
 /**
- * Generate all 72 group-stage matches with deterministic sample scores.
+ * Generate the 72 group-stage fixtures from the current group draw.
  *
- * Scores come from the shared Poisson model seeded by match id, so they are
- * stable across reloads and look plausible given each team's rating.
+ * Unlike the old demo data, these matches are not pre-scored. The bundled
+ * static source is now a fixture schedule; scores and scorer events should come
+ * from a real live feed or a manually maintained results file.
  */
 export function generateGroupMatches(): Match[] {
-  const matches: Match[] = [];
-  const groups = [...new Set(SEED_TEAMS.map((t) => t.group))].sort();
+  const groups = [
+    ...new Set(SEED_TEAMS.map((t) => t.group)),
+  ].sort() as GroupId[];
 
-  groups.forEach((group, groupIndex) => {
+  return groups.flatMap((group) => {
     const teams = teamsOfGroup(group);
-    ROUND_ROBIN.forEach((round, matchday) => {
-      round.forEach(([a, b], slot) => {
-        const home = teams[a]!;
-        const away = teams[b]!;
-        const id = `g-${group}-md${matchday + 1}-m${slot + 1}`;
-        const rng = mulberry32(hashString(id));
-        const score = simulateScore(home, away, rng);
-        matches.push({
-          id,
+
+    return GROUP_PAIRINGS.flatMap((round, matchday) =>
+      round.map(([homeIndex, awayIndex], slot) => {
+        const home = teams[homeIndex]!;
+        const away = teams[awayIndex]!;
+
+        return {
+          id: `g-${group}-md${matchday + 1}-m${slot + 1}`,
           stage: 'group',
           group,
-          kickoff: kickoff(matchday, groupIndex, slot),
-          status: 'finished',
-          venue: `Group ${group} venue`,
+          kickoff: kickoff(group, matchday, slot),
+          status: 'scheduled',
           homeId: home.id,
           awayId: away.id,
-          homeGoals: score.home,
-          awayGoals: score.away,
-        });
-      });
-    });
+          homeGoals: null,
+          awayGoals: null,
+        };
+      }),
+    );
   });
-
-  return matches;
 }

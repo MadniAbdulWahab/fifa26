@@ -14,26 +14,29 @@ modern browser on phone or desktop and can be installed to the home screen.
 
 It was built to answer four questions at a glance:
 
-1. **When and where is each match?** — in *your own* local time.
+1. **When and where is each match?** — in **German time (CET/CEST)**.
 2. **How is each team doing?** — wins, draws, losses, goals, points.
 3. **What are a team's chances of going through?** — and of winning it all.
 4. **What does the knockout path look like?** — an auto-seeding bracket.
 
 …plus the ability to follow favorite teams and get kickoff reminders.
 
-It works **offline with bundled sample data out of the box** (no account, no API
-key) and can be switched to **live data** with one environment variable.
+It runs on **live data from football-data.org** by default, and falls back to a
+bundled fixture schedule (no account, no API key) when no data source is
+configured.
 
 ---
 
 ## 2. Features in detail
 
 ### Fixtures (home screen)
+
 - Every match as a card: both teams (flag + name), score or kickoff time, the
   stage/group, and a status badge (`LIVE` with a pulsing dot, or `FT`).
-- **Times are shown in the viewer's local timezone.** Kickoffs are stored as
-  UTC and converted with Day.js using the browser's detected timezone, so a
-  16:00 UTC kickoff reads 18:00 in Berlin and 11:00 in New York.
+- **Times are shown in German time (Europe/Berlin) for everyone.** Kickoffs are
+  stored as UTC and converted with Day.js to a fixed German timezone, so a 16:00
+  UTC kickoff reads 18:00 (CEST) for every viewer, anywhere in the world. A small
+  "All times shown in German time" note appears on the fixtures screen.
 - Matches are grouped by day and sorted chronologically. On open, the list
   **auto-scrolls to the live match (or the next upcoming one)** so you start on
   what matters; scroll up for past results.
@@ -46,14 +49,22 @@ key) and can be switched to **live data** with one environment variable.
 - **Tap any match** to open its detail page (see below).
 
 ### Match detail page
+
 - Opens when you click a fixture. A Google-style scoreboard: large flags, both
-  teams, score or "vs" + local kickoff time, stage/group, venue, and a LIVE/FT
+  teams, score or "vs" + German-time kickoff, stage/group, venue, and a LIVE/FT
   badge (red ring when live).
+- Finished/live matches show scorers and goal minutes directly below each team in
+  the scoreboard, plus an Events tab with the fuller timeline and assists. These
+  come from a **separate free provider (TheSportsDB)**, fetched per match, because
+  football-data.org's free tier omits scorers. TheSportsDB's timelines are
+  community-sourced and often incomplete, so when fewer goals are listed than the
+  score the page shows a **"Partial data"** badge.
 - Below it, each team's record (W/D/L, points) and chance to reach the
   knockouts, and — for group matches — that group's standings table. Tap a team
   to open its full team page.
 
 ### Standings
+
 - All 12 group tables, each with Played, Won, Drawn, Lost, Goal Difference and
   Points, sorted by the standard tie-breakers (points → GD → goals scored).
 - The top two of each group are highlighted (qualify); third place is flagged as
@@ -61,6 +72,7 @@ key) and can be switched to **live data** with one environment variable.
 - Each row shows that team's **estimated chance to reach the knockouts**.
 
 ### Advancement & title odds (the standout feature)
+
 - A **Monte-Carlo simulation** estimates two probabilities per team:
   - chance to **reach the knockout stage**, and
   - chance to **win the tournament**.
@@ -75,12 +87,14 @@ key) and can be switched to **live data** with one environment variable.
   reproducible in tests. It is an approximation for fun — not betting advice.
 
 ### Knockout bracket
+
 - Columns for Round of 32 → Round of 16 → Quarter-finals → Semi-finals → Final.
 - The Round of 32 is seeded from the group standings (ranked 1–32, paired
   1‑v‑32, 2‑v‑31, …). Later rounds show "TBD" until results decide them.
 - A **Title contenders** panel ranks teams by simulated trophy odds.
 
 ### Favorites & reminders
+
 - Tap the ☆ on any team to follow it. Favorites are saved in `localStorage`
   (**device-local** — no accounts/backend, so they don't sync across devices).
 - The Favorites page shows each followed team's record, advancement bar and next
@@ -88,10 +102,12 @@ key) and can be switched to **live data** with one environment variable.
   few minutes before kickoff while the app is open).
 
 ### Team page
+
 - Full record (P/W/D/L/GF/GA/GD/Pts), advancement + title odds bars, and the
   team's complete match list.
 
 ### Polish
+
 - Mobile-first layout: bottom tab bar on phones, top nav on desktop.
 - **Real country flags** (flag images via flagcdn, cached for offline) — emoji
   flags don't render on Windows, so images are used everywhere.
@@ -102,22 +118,23 @@ key) and can be switched to **live data** with one environment variable.
 
 ## 3. How it's built
 
-| Concern         | Choice                                         |
-| --------------- | ---------------------------------------------- |
-| Language / UI   | TypeScript, React 18                           |
-| Build tool      | Vite 5                                          |
-| Styling         | Tailwind CSS (class-based dark mode)           |
-| Data fetching   | TanStack Query (caching + periodic refetch)    |
-| Routing         | React Router 6                                 |
-| Dates / times   | Day.js (utc, timezone, advancedFormat plugins) |
-| PWA             | vite-plugin-pwa (Workbox service worker)       |
-| Tests           | Vitest                                         |
-| Lint / format   | ESLint + Prettier                              |
+| Concern       | Choice                                         |
+| ------------- | ---------------------------------------------- |
+| Language / UI | TypeScript, React 18                           |
+| Build tool    | Vite 5                                         |
+| Styling       | Tailwind CSS (class-based dark mode)           |
+| Data fetching | TanStack Query (caching + periodic refetch)    |
+| Routing       | React Router 6                                 |
+| Dates / times | Day.js (utc, timezone, advancedFormat plugins) |
+| PWA           | vite-plugin-pwa (Workbox service worker)       |
+| Tests         | Vitest                                         |
+| Lint / format | ESLint + Prettier                              |
 
 ### Layered architecture
+
 ```
 domain  → framework-free types (Team, Match, GroupStandings…)
-data    → DataSource interface + static and live-API implementations
+data    → DataSource interface + static/live-API impls + events overlay (scorers)
 lib     → pure logic: datetime, matchTime, flags, record, standings, bracket, advancement, rng, model
 stores  → observable state (favorites)
 hooks   → React glue (favorites, theme, reminders)
@@ -127,25 +144,31 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
 ```
 
 ### Key design principles
+
 - **One data boundary.** The UI only ever sees `domain` types. A `DataSource`
   interface hides the backend; `createDataSource()` chooses the implementation
   from config. Swapping or adding a backend is a single-file change.
 - **Pure, tested logic.** Everything in `lib/` is side-effect-free and unit
-  tested. The *same* goal model powers both the sample scores and the odds, so
-  they stay consistent.
-- **Deterministic randomness.** A small seeded PRNG (`lib/rng.ts`) makes sample
-  data and odds reproducible.
+  tested. The goal model powers the odds simulation.
+- **Deterministic randomness.** A small seeded PRNG (`lib/rng.ts`) makes odds
+  reproducible.
 
 ### Data sources
-- **Static (default):** bundled sample data — 48 teams in 12 groups, a generated
-  group stage with plausible scores, and a bracket derived from the standings.
-  Fully offline and deterministic. *The draw and results are illustrative, not
-  the official schedule.*
-- **Live API:** football-data.org (competition `WC`). Enabled via env vars; in
-  dev, Vite proxies requests to avoid CORS. Production needs a small serverless
-  proxy so the API token never ships to the browser (see README).
+
+- **Live API (default):** football-data.org (competition `WC`) — real fixtures,
+  results and scorer events. In dev, Vite proxies requests to avoid CORS and the
+  token comes from `.env`. Production uses the small proxy in `proxy/` (a
+  Cloudflare Worker) so the API token never ships to the browser (see README).
+- **Static (offline fallback):** bundled fixture data — 48 teams in 12 groups and
+  a group-stage pairing schedule. Fully offline and deterministic, but it does
+  not include live scores, official results, lineups or scorer events.
+- **Goal-scorers overlay:** TheSportsDB (free, public, CORS, no proxy) supplies
+  per-match goal scorers/minutes on the match page, since football-data's free
+  tier omits them. Lives in `src/data/events/` as a `MatchEventsSource`, kept
+  separate from the main `DataSource`. Community-sourced and often partial.
 
 ### Deployment
+
 - Auto-deploys to **GitHub Pages** at
   https://madniabdulwahab.github.io/fifa26/ on every push to `main`
   (`.github/workflows/deploy.yml`). The build uses a `/fifa26/` base path, the
@@ -160,6 +183,7 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
 PWA, dark mode, unit tests, both data sources, GitHub Pages deploy.
 
 **Possible next steps:**
+
 - Plug in real WC2026 draw/schedule data (or the live API token).
 - Official FIFA bracket-slotting rules for best-third placement.
 - Head-to-head tie-breakers in standings.
