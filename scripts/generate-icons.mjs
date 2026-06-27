@@ -1,7 +1,7 @@
 /**
- * Generates the PWA PNG icons (public/pwa-192.png, public/pwa-512.png) with no
- * external dependencies, so a fresh clone can `npm run icons` and get valid
- * maskable icons. A navy rounded square with a white circle mark.
+ * Generates the PWA PNG icons (including the iOS home-screen touch icon) with
+ * no external dependencies, so a fresh clone can `npm run icons` and get valid
+ * install icons. A navy rounded square with a white circle mark.
  */
 import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
@@ -32,7 +32,8 @@ function chunk(type, data) {
   return Buffer.concat([lenBuf, typeBuf, data, crcBuf]);
 }
 
-function makePng(size) {
+function makePng(size, options = {}) {
+  const roundedCorners = options.roundedCorners ?? true;
   const radius = size * 0.16; // corner rounding
   const circleR = size * 0.34;
   const cx = size / 2;
@@ -47,7 +48,8 @@ function makePng(size) {
       const inCircle = (x - cx) ** 2 + (y - cy) ** 2 <= circleR ** 2;
       const [r, g, b] = inCircle ? WHITE : NAVY;
       // Rounded-corner transparency.
-      const visible = insideRoundedSquare(x, y, size, radius);
+      const visible =
+        !roundedCorners || insideRoundedSquare(x, y, size, radius);
       raw[i] = r;
       raw[i + 1] = g;
       raw[i + 2] = b;
@@ -84,3 +86,8 @@ for (const size of [192, 512]) {
   writeFileSync(join(PUBLIC_DIR, `pwa-${size}.png`), makePng(size));
   console.log(`wrote public/pwa-${size}.png`);
 }
+writeFileSync(
+  join(PUBLIC_DIR, 'apple-touch-icon.png'),
+  makePng(180, { roundedCorners: false }),
+);
+console.log('wrote public/apple-touch-icon.png');

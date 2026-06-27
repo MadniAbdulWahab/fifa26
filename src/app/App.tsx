@@ -16,7 +16,7 @@ export default function App() {
     <div className="mx-auto flex min-h-full max-w-3xl flex-col">
       <ScrollToTopOnNavigate />
       <Nav />
-      <main className="flex-1 px-4 pb-24 pt-4 sm:pb-8">
+      <main className="flex-1 px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-4 sm:pb-8">
         {error ? (
           <ErrorState message={error.message} />
         ) : isLoading ? (
