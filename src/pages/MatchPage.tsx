@@ -6,7 +6,7 @@ import { OddsBar } from '@/components/OddsBar';
 import { StandingsTable } from '@/components/StandingsTable';
 import { StatusBadge } from '@/components/StatusBadge';
 import { TeamBadge } from '@/components/TeamBadge';
-import type { Match, MatchEvent, Team } from '@/domain/types';
+import type { CommentaryEntry, Match, MatchEvent, Team } from '@/domain/types';
 import { formatDay, formatTime, germanTimeZoneLabel } from '@/lib/datetime';
 import { matchStageLabel } from '@/lib/labels';
 import { isLiveNow } from '@/lib/matchTime';
@@ -17,12 +17,13 @@ export function MatchPage() {
   const { id } = useParams<{ id: string }>();
   const { matches, getTeam, standings } = useTournament();
   const match = matches.find((m) => m.id === id);
-  const [detailTab, setDetailTab] = useState<'events' | 'outlook'>('events');
+  const [detailTab, setDetailTab] = useState<DetailTab>('events');
 
   const home = match ? getTeam(match.homeId) : undefined;
   const away = match ? getTeam(match.awayId) : undefined;
   const {
-    events,
+    goals,
+    commentary,
     partial: partialEvents,
     isLoading: eventsLoading,
   } = useMatchEvents(match, home, away);
@@ -40,7 +41,7 @@ export function MatchPage() {
 
   const played = match.homeGoals !== null && match.awayGoals !== null;
   const live = isLiveNow(match);
-  const goalEvents = events.filter((event) => event.type === 'goal');
+  const goalEvents = goals.filter((event) => event.type === 'goal');
   const group =
     match.group !== undefined
       ? standings.find((g) => g.group === match.group)
@@ -95,7 +96,7 @@ export function MatchPage() {
         </div>
       </section>
 
-      {played ? (
+      {played || live ? (
         <MatchDetailsTabs
           activeTab={detailTab}
           onTabChange={setDetailTab}
@@ -103,8 +104,10 @@ export function MatchPage() {
           away={away}
           matches={matches}
           goalEvents={goalEvents}
+          commentary={commentary}
           partial={partialEvents}
           loading={eventsLoading}
+          live={live}
         />
       ) : (
         <TeamOutlookGrid home={home} away={away} matches={matches} />
@@ -120,6 +123,8 @@ export function MatchPage() {
   );
 }
 
+type DetailTab = 'events' | 'commentary' | 'outlook';
+
 function MatchDetailsTabs({
   activeTab,
   onTabChange,
@@ -127,47 +132,59 @@ function MatchDetailsTabs({
   away,
   matches,
   goalEvents,
+  commentary,
   partial,
   loading,
+  live,
 }: {
-  activeTab: 'events' | 'outlook';
-  onTabChange: (tab: 'events' | 'outlook') => void;
+  activeTab: DetailTab;
+  onTabChange: (tab: DetailTab) => void;
   home: Team | undefined;
   away: Team | undefined;
   matches: Match[];
   goalEvents: MatchEvent[];
+  commentary: CommentaryEntry[];
   partial: boolean;
   loading: boolean;
+  live: boolean;
 }) {
+  const tabs: { key: DetailTab; label: string }[] = [
+    { key: 'events', label: 'Events' },
+    ...(commentary.length > 0
+      ? [{ key: 'commentary' as const, label: 'Commentary' }]
+      : []),
+    { key: 'outlook', label: 'Team outlook' },
+  ];
+  // Commentary may disappear (source change); fall back so no blank panel shows.
+  const current = tabs.some((t) => t.key === activeTab) ? activeTab : 'events';
+
   return (
     <section className="card overflow-hidden">
-      <div className="grid grid-cols-2 border-b border-slate-200 text-sm font-semibold dark:border-slate-800">
-        <button
-          type="button"
-          onClick={() => onTabChange('events')}
-          className={`px-3 py-3 ${
-            activeTab === 'events'
-              ? 'border-b-2 border-brand text-brand'
-              : 'text-slate-500'
-          }`}
-        >
-          Events
-        </button>
-        <button
-          type="button"
-          onClick={() => onTabChange('outlook')}
-          className={`px-3 py-3 ${
-            activeTab === 'outlook'
-              ? 'border-b-2 border-brand text-brand'
-              : 'text-slate-500'
-          }`}
-        >
-          Team outlook
-        </button>
+      <div
+        className="grid border-b border-slate-200 text-sm font-semibold dark:border-slate-800"
+        style={{ gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))` }}
+      >
+        {tabs.map((t) => (
+          <button
+            key={t.key}
+            type="button"
+            onClick={() => onTabChange(t.key)}
+            className={`px-3 py-3 ${
+              current === t.key
+                ? 'border-b-2 border-brand text-brand'
+                : 'text-slate-500'
+            }`}
+          >
+            {t.label}
+            {t.key === 'commentary' && live && (
+              <span className="ml-1.5 inline-block h-2 w-2 animate-pulse-live rounded-full bg-red-500 align-middle" />
+            )}
+          </button>
+        ))}
       </div>
 
       <div className="p-4">
-        {activeTab === 'events' ? (
+        {current === 'events' ? (
           <MatchEvents
             events={goalEvents}
             home={home}
@@ -175,11 +192,44 @@ function MatchDetailsTabs({
             partial={partial}
             loading={loading}
           />
+        ) : current === 'commentary' ? (
+          <MatchCommentary commentary={commentary} live={live} />
         ) : (
           <TeamOutlookGrid home={home} away={away} matches={matches} flush />
         )}
       </div>
     </section>
+  );
+}
+
+function MatchCommentary({
+  commentary,
+  live,
+}: {
+  commentary: CommentaryEntry[];
+  live: boolean;
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="font-bold">Commentary</h2>
+        {live && (
+          <span className="rounded-full bg-red-500/15 px-2 py-0.5 text-xs font-semibold text-red-500">
+            LIVE
+          </span>
+        )}
+      </div>
+      <ol className="mt-3 space-y-3">
+        {commentary.map((c) => (
+          <li key={c.id} className="flex gap-3">
+            <span className="w-10 shrink-0 text-sm font-semibold tabular-nums text-brand">
+              {c.minute ?? ''}
+            </span>
+            <p className="text-sm text-slate-600 dark:text-slate-300">{c.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 

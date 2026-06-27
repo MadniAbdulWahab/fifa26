@@ -1,6 +1,6 @@
 import { config } from '@/config';
 import type { Match, MatchEvent, Team } from '@/domain/types';
-import type { MatchEventsSource } from './MatchEventsSource';
+import type { MatchEventsSource, MatchFeed } from './MatchEventsSource';
 import { matchesTeam } from './teamNames';
 import type {
   TsdbEvent,
@@ -107,24 +107,22 @@ export class TheSportsDbEventsSource implements MatchEventsSource {
     return undefined;
   }
 
-  async getMatchEvents(
-    match: Match,
-    home: Team,
-    away: Team,
-  ): Promise<MatchEvent[]> {
+  async getMatchFeed(match: Match, home: Team, away: Team): Promise<MatchFeed> {
     const event = await this.findEvent(match, home, away);
-    if (!event) return [];
+    if (!event) return { goals: [], commentary: [] };
 
     const homeIsOurHome = matchesTeam(event.strHomeTeam, home);
     const data = await this.fetchJson<TsdbTimelineResponse>(
       `/lookuptimeline.php?id=${event.idEvent}`,
     );
-    return mapTimelineToGoals(
+    const goals = mapTimelineToGoals(
       data?.timeline ?? [],
       match,
       home,
       away,
       homeIsOurHome,
     );
+    // TheSportsDB has no text commentary feed.
+    return { goals, commentary: [] };
   }
 }

@@ -6,9 +6,10 @@ scorers when event data is available, group standings with W/D/L, Monte-Carlo
 **advancement & title odds**, an auto-seeding knockout **bracket**, real country
 flags, and follow-your-team favorites with kickoff reminders.
 
-> Uses **live data from football-data.org** by default. Falls back to a bundled
-> fixture schedule (no API key) if no data source is configured. All match times
-> are shown in German time for every viewer, regardless of their location.
+> Uses **live data from ESPN's public API** by default — fresher scores, no API
+> key, no proxy. football-data.org and a bundled offline schedule are selectable
+> fallbacks. All match times are shown in German time for every viewer,
+> regardless of their location.
 
 **Live:** https://madniabdulwahab.github.io/fifa26/ (deployed via GitHub Pages).
 
@@ -69,29 +70,34 @@ Key design choices:
 
 ## Data sources
 
-### Live API (default — football-data.org)
+The main source is chosen by `VITE_DATA_SOURCE` (`espn` | `api` | `static`).
+
+### ESPN (default)
+
+`VITE_DATA_SOURCE=espn` reads fixtures, scores, statuses and stages from ESPN's
+public site API (`site.api.espn.com`, competition `fifa.world`). It's **key-less
+and CORS-enabled**, so it works in dev and on GitHub Pages with **no token and no
+proxy**, and updates scores promptly. The fixed group draw + FIFA codes/ratings
+come from the bundled `SEED_TEAMS` (ESPN doesn't tag the group letter).
+
+> ESPN's API is **undocumented/unofficial** — no SLA and it could change. All
+> ESPN-specific code is isolated in `src/data/espn/` and fails soft; the `api`
+> and `static` sources below remain one env var away.
+
+### football-data.org (`api`)
 
 ```bash
-cp .env.example .env
-# edit .env:
-VITE_DATA_SOURCE=api
+cp .env.example .env   # then set VITE_DATA_SOURCE=api
 VITE_FOOTBALL_DATA_TOKEN=your_free_token   # https://www.football-data.org/client/register
 ```
 
-The app reads real fixtures, results and scorer events from football-data.org
-(competition `WC`). In development, Vite proxies `/football-data` to
-`api.football-data.org` (see `vite.config.ts`) to avoid CORS, and the token is
-sent as `X-Auth-Token`.
+Reads fixtures/results from football-data.org (competition `WC`). In dev, Vite
+proxies `/football-data` to avoid CORS. **Production:** it sends no CORS headers
+and the token must not ship in client code — deploy the proxy in
+[`proxy/`](proxy/README.md) and set `VITE_FOOTBALL_DATA_BASE` to its URL. Note its
+free tier has no scorers and may not cover the World Cup.
 
-**Production:** football-data.org does not send CORS headers, and the token must
-never ship in client code. Deploy the small proxy in [`proxy/`](proxy/README.md)
-(a Cloudflare Worker that injects the token + adds CORS), then set
-`VITE_FOOTBALL_DATA_BASE` to its URL and leave `VITE_FOOTBALL_DATA_TOKEN` empty.
-
-> **Note:** the World Cup competition may not be available on football-data.org's
-> free tier — confirm your token can read `/v4/competitions/WC/matches`.
-
-### Static (offline fallback)
+### Static (offline)
 
 `VITE_DATA_SOURCE=static` (or leaving it unset) uses bundled fixture data: 48
 teams in 12 groups and the group-stage pairing schedule. Useful for development,
@@ -100,21 +106,25 @@ demos and offline use without an API key.
 > Static mode is a fixture schedule only: it does not include live scores,
 > official results, lineups or scorer events.
 
-### Goal scorers overlay (TheSportsDB)
+### Match-feed overlay: scorers + live commentary
 
 football-data.org's free tier has no scorers, so the match page pulls **goal
-scorers + minutes** from [TheSportsDB](https://www.thesportsdb.com) — a free,
-public, CORS-enabled API (no proxy or token needed; the shared key `123` is the
-default). It's queried one match at a time and cached.
+scorers** and **live text commentary** from a free overlay, queried one match at
+a time (and re-polled while a match is live).
 
 ```bash
-VITE_EVENTS_SOURCE=thesportsdb   # default; set to "none" to disable
-# VITE_THESPORTSDB_KEY=123       # override with a Patreon key for higher limits
+VITE_EVENTS_SOURCE=espn          # default
+#   espn        ESPN's public API — complete scorers + live commentary, key-less
+#               and CORS (no proxy). Undocumented/unofficial (no SLA).
+#   thesportsdb documented but partial goal timelines, no commentary.
+#   none        disable the feature.
+# VITE_THESPORTSDB_KEY=123       # only for thesportsdb (public test key)
 ```
 
-> TheSportsDB timelines are community-sourced and **often incomplete** (a 2–0 may
-> list only one scorer). When fewer goals are present than the final score, the
-> UI shows a **"Partial data"** badge.
+> **ESPN (default)** returns complete goals + ~full play-by-play commentary, with
+> no key or proxy — but it's an undocumented API and could change. **TheSportsDB**
+> is documented/sanctioned but its timelines are community-sourced and often
+> incomplete, so the UI shows a **"Partial data"** badge when goals are missing.
 
 ## How the odds work
 

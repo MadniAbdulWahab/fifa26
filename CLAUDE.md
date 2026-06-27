@@ -41,14 +41,23 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   - `static/` — `StaticDataSource` + bundled fixture data (`teams.ts` = 48 teams
     in 12 groups; `schedule.ts` generates scheduled group-stage fixtures from
     the draw positions, with no invented scores/events).
+  - `espn/` — `EspnDataSource` (**default**, `VITE_DATA_SOURCE=espn`). ESPN's
+    public site API: fresher scores, key-less + CORS (no proxy), but
+    **undocumented** — all shapes isolated in `espnApiTypes.ts`, fails soft.
+    ESPN supplies live ids/scores/schedule/stage; `SEED_TEAMS` supplies
+    codes/flags/ratings and the **group letter** (ESPN doesn't tag groups —
+    derived via `groupForTeam` + `matchesTeam`). Pure mappers are unit-tested.
   - `api/` — `ApiDataSource` for football-data.org + its response types.
-  - `events/` — **goal-scorers overlay** (separate from `DataSource`).
-    football-data's free tier has no scorers, so `TheSportsDbEventsSource`
-    fetches goals for **one match at a time** from TheSportsDB (public/free, no
-    proxy). `createEventsSource.ts` is the factory; `teamNames.ts` matches the
-    two providers' team names (aliases + diacritic-insensitive normalize);
-    mapping fns are pure + unit-tested. Timelines are community-sourced and often
-    incomplete — the UI shows a "Partial data" badge.
+  - `events/` — **match-feed overlay** (goals + commentary, separate from
+    `DataSource`). football-data's free tier has no scorers, so a source fetches
+    them for **one match at a time** via `getMatchFeed` → `{ goals, commentary }`.
+    Implementations: `EspnEventsSource` (**default**, `VITE_EVENTS_SOURCE=espn`)
+    — ESPN's public API, **complete** scorers + **live text commentary**,
+    key-less + CORS (no proxy), but undocumented; `TheSportsDbEventsSource`
+    (`thesportsdb`) — documented but partial goals, no commentary (shows a
+    "Partial data" badge). `createEventsSource.ts` is the factory; `teamNames.ts`
+    matches providers' team names (aliases + diacritic-insensitive normalize) to
+    find the right fixture by date + teams; mapping fns are pure + unit-tested.
 - `lib/` — **pure, framework-free, unit-tested logic.** No React imports here.
   - `rng.ts` — seeded PRNG (mulberry32), `hashString`, `poisson`.
   - `model.ts` — shared Poisson goal model (expected goals from rating gap).
@@ -67,8 +76,9 @@ commit messages with the `Co-Authored-By: Claude` trailer.
 - `stores/favoritesStore.ts` — observable, localStorage-backed favorites
   (shaped for `useSyncExternalStore`).
 - `hooks/` — React glue: `useFavorites`, `useTheme`, `useKickoffReminders`,
-  `useMatchEvents` (on-demand goal scorers for the open match, via the events
-  overlay; React-Query cached, only enabled once a match has started).
+  `useMatchEvents` (on-demand goals + commentary for the open match, via the
+  events overlay; React-Query cached, enabled once a match has started, and
+  re-polls every 30s while it is live).
 - `components/` — presentational UI (MatchCard, StandingsTable, Bracket,
   OddsBar, TitleOdds, TeamBadge, FavoriteStar, StatusBadge, ThemeToggle,
   NotificationButton).
@@ -86,7 +96,8 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   - `TournamentContext.tsx` — fetches teams+matches via React Query **once** and
     memoizes derived data (`teamsById`, `standings`, `odds`). Consume with
     `useTournament()`; loading/error via `useLoadState()`.
-- `config.ts` — typed env access (`VITE_DATA_SOURCE`, football-data vars).
+- `config.ts` — typed env access. `VITE_DATA_SOURCE` = `espn` (default) | `api`
+  | `static`; plus football-data + events-overlay vars.
 - `main.tsx` — providers: React Query → Router → TournamentProvider → App. The
   router `basename` comes from `import.meta.env.BASE_URL` so routing works under
   the Pages sub-path `/fifa26/`.
@@ -117,10 +128,12 @@ recompute heavy derived state themselves.
   scores, official results, lineups, scorers or match events.
 - Favorites are **device-local** (`localStorage`, key `wc26:favorites`) — no
   accounts/backend, not synced across devices.
-- **Goal scorers** come from the `data/events/` overlay (TheSportsDB), fetched
-  per-match on the match page — *not* from the main `DataSource`. Data is
-  community-sourced and frequently partial; never assume a full scorer list.
-  Disable with `VITE_EVENTS_SOURCE=none`.
+- **Goal scorers + commentary** come from the `data/events/` overlay, fetched
+  per-match on the match page — *not* from the main `DataSource`. Default is ESPN
+  (complete, with live commentary) but it's an **undocumented** API — isolate all
+  ESPN shape knowledge in `EspnEventsSource`/`espnTypes.ts` and fail soft (empty
+  feed). `thesportsdb` data is partial; `none` disables. The match page's
+  Commentary tab only appears when commentary is available.
 
 ## Deployment (GitHub Pages)
 
@@ -128,13 +141,13 @@ recompute heavy derived state themselves.
   `/`) and the PWA `manifest` `start_url`/`scope` use that base.
 - `.github/workflows/deploy.yml` runs `npm ci && npm run build`, copies
   `dist/index.html → dist/404.html` (SPA fallback for deep-link refreshes), and
-  publishes via `actions/deploy-pages`. The build reads `VITE_DATA_SOURCE` and
-  `VITE_FOOTBALL_DATA_BASE` from repo **Actions Variables** to enable live data
-  in production.
-- **Live data in prod needs a proxy** (football-data.org sends no CORS headers
-  and the token must not ship to the client). Deploy `proxy/cloudflare-worker.js`
-  (holds the token as a secret, adds CORS) and point `VITE_FOOTBALL_DATA_BASE` at
-  it. See [proxy/README.md](proxy/README.md).
+  publishes via `actions/deploy-pages`.
+- **Default deploy needs no secrets/proxy:** the ESPN source is key-less + CORS,
+  so production live data works out of the box.
+- **Only if you switch to `api`** (football-data.org): it sends no CORS headers
+  and the token must not ship to the client — deploy `proxy/cloudflare-worker.js`
+  and set repo **Actions Variables** `VITE_DATA_SOURCE=api` +
+  `VITE_FOOTBALL_DATA_BASE`. See [proxy/README.md](proxy/README.md).
 - For a different host/repo name, change the base path, the router `basename`
   (auto from `BASE_URL`), and the workflow.
 

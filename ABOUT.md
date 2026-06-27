@@ -21,9 +21,9 @@ It was built to answer four questions at a glance:
 
 …plus the ability to follow favorite teams and get kickoff reminders.
 
-It runs on **live data from football-data.org** by default, and falls back to a
-bundled fixture schedule (no account, no API key) when no data source is
-configured.
+It runs on **live data from ESPN's public API** by default (fresher scores, no
+account, no API key, no proxy); football-data.org and a bundled offline schedule
+are selectable alternatives.
 
 ---
 
@@ -54,11 +54,13 @@ configured.
   teams, score or "vs" + German-time kickoff, stage/group, venue, and a LIVE/FT
   badge (red ring when live).
 - Finished/live matches show scorers and goal minutes directly below each team in
-  the scoreboard, plus an Events tab with the fuller timeline and assists. These
-  come from a **separate free provider (TheSportsDB)**, fetched per match, because
-  football-data.org's free tier omits scorers. TheSportsDB's timelines are
-  community-sourced and often incomplete, so when fewer goals are listed than the
-  score the page shows a **"Partial data"** badge.
+  the scoreboard, plus an **Events** tab (goals + assists) and a **Commentary**
+  tab with live play-by-play text. These come from a **separate free overlay**,
+  fetched per match (and re-polled while live), because football-data.org's free
+  tier omits scorers. Default is **ESPN's public API** (complete scorers + full
+  commentary, no key/proxy — but undocumented); an alternative **TheSportsDB**
+  source has only partial goals and no commentary, in which case a **"Partial
+  data"** badge is shown.
 - Below it, each team's record (W/D/L, points) and chance to reach the
   knockouts, and — for group matches — that group's standings table. Tap a team
   to open its full team page.
@@ -153,19 +155,24 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
 - **Deterministic randomness.** A small seeded PRNG (`lib/rng.ts`) makes odds
   reproducible.
 
-### Data sources
+### Data sources (`VITE_DATA_SOURCE`)
 
-- **Live API (default):** football-data.org (competition `WC`) — real fixtures,
-  results and scorer events. In dev, Vite proxies requests to avoid CORS and the
-  token comes from `.env`. Production uses the small proxy in `proxy/` (a
-  Cloudflare Worker) so the API token never ships to the browser (see README).
-- **Static (offline fallback):** bundled fixture data — 48 teams in 12 groups and
-  a group-stage pairing schedule. Fully offline and deterministic, but it does
-  not include live scores, official results, lineups or scorer events.
-- **Goal-scorers overlay:** TheSportsDB (free, public, CORS, no proxy) supplies
-  per-match goal scorers/minutes on the match page, since football-data's free
-  tier omits them. Lives in `src/data/events/` as a `MatchEventsSource`, kept
-  separate from the main `DataSource`. Community-sourced and often partial.
+- **ESPN (default, `espn`):** ESPN's public site API (`fifa.world`) — fresher
+  scores, **key-less + CORS, so no token or proxy** in dev or production. ESPN
+  supplies live ids/scores/schedule/stage; the bundled `SEED_TEAMS` supplies FIFA
+  codes/flags/ratings and the group letter (ESPN doesn't tag groups). Undocumented
+  API, isolated in `src/data/espn/` and fails soft.
+- **football-data.org (`api`):** competition `WC` real fixtures/results. In dev,
+  Vite proxies to avoid CORS; production needs the `proxy/` Cloudflare Worker so
+  the token never ships to the browser (see README). Free tier has no scorers.
+- **Static (offline, `static`):** bundled fixture data — 48 teams in 12 groups and
+  a group-stage pairing schedule. Fully offline and deterministic, but no scores.
+- **Match-feed overlay:** supplies per-match goal scorers + live commentary on
+  the match page, since football-data's free tier omits them. Lives in
+  `src/data/events/` as a `MatchEventsSource` (`getMatchFeed → { goals,
+  commentary }`), separate from the main `DataSource`. Default **ESPN** (complete,
+  with commentary, key-less + CORS, undocumented); **TheSportsDB** alternative is
+  documented but partial. Selectable via `VITE_EVENTS_SOURCE`.
 
 ### Deployment
 

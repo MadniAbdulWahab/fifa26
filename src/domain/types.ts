@@ -68,6 +68,14 @@ export interface MatchEvent {
   assistName?: string;
 }
 
+/** A single line of play-by-play text commentary for a match. */
+export interface CommentaryEntry {
+  id: string;
+  /** Match minute, e.g. "23'" — may be empty for non-timed lines (kickoff etc). */
+  minute?: string;
+  text: string;
+}
+
 /** A team's accumulated win/draw/loss record. */
 export interface TeamRecord {
   teamId: TeamId;

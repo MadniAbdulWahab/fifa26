@@ -34,9 +34,11 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Live data from football-data.org via the proxy Worker (see proxy/).
-          # Configure these in repo Settings → Secrets and variables → Actions.
-          # Falls back to the bundled static schedule if VITE_DATA_SOURCE is unset.
+          # Default (no vars set) is the ESPN data source — key-less + CORS, so the
+          # deployed site needs NO secrets or proxy. These optional repo Variables
+          # (Settings → Secrets and variables → Actions) only matter if you switch
+          # to football-data.org: set VITE_DATA_SOURCE=api and point
+          # VITE_FOOTBALL_DATA_BASE at your proxy Worker (see proxy/).
           VITE_DATA_SOURCE: ${{ vars.VITE_DATA_SOURCE }}
           VITE_FOOTBALL_DATA_BASE: ${{ vars.VITE_FOOTBALL_DATA_BASE }}
 
