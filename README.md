@@ -158,12 +158,9 @@ One-time setup: the repo must be **Public** (free Pages), and **Settings → Pag
 → Source: GitHub Actions**. For a fork under a different repo name, change the
 `base` in `vite.config.ts`.
 
-### Vercel / Netlify (alternative)
-
-Import the repo, build command `npm run build`, output `dist`. Add a SPA rewrite
-(all routes → `/index.html`) and, for live data, a serverless proxy + the
-`VITE_*` env vars. Served from root, so no base-path change needed.
-
 ## License
 
-MIT
+Copyright © Abdul Wahab Madni. All rights reserved.
+
+This is a personal app. No open-source license is granted unless one is added
+explicitly later.

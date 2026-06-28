@@ -182,7 +182,7 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
   https://madniabdulwahab.github.io/fifa26/ on every push to `main`
   (`.github/workflows/deploy.yml`). The build uses a `/fifa26/` base path, the
   router reads `basename` from it, and `index.html` is copied to `404.html` so
-  deep-link refreshes work. Vercel/Netlify are easy alternatives (see README).
+  deep-link refreshes work.
 
 ---
 
