@@ -12,6 +12,7 @@ import { formatDay, formatTime, germanTimeZoneLabel } from '@/lib/datetime';
 import { formatPercent } from '@/lib/labels';
 import { isFinished, isLiveNow } from '@/lib/matchTime';
 import { expectedGoals } from '@/lib/model';
+import { teamAccentColor, withAlpha } from '@/lib/teamColors';
 import {
   qualificationStatus,
   type QualificationStatus,
@@ -184,37 +185,60 @@ function PredictionCard({
   }
 
   const probabilities = predictMatch(home, away);
+  const homeColor = teamAccentColor(home);
+  const awayColor = teamAccentColor(away);
+  const drawColor = '#f59e0b';
   const outcomes = [
     {
-      key: 'home',
-      label: `${home.name} win`,
+      key: 'home' as const,
+      label: `${home.name} wins`,
       value: probabilities.homeWin,
+      color: homeColor,
     },
-    { key: 'draw', label: 'Draw', value: probabilities.draw },
     {
-      key: 'away',
-      label: `${away.name} win`,
+      key: 'draw' as const,
+      label: 'Draw',
+      value: probabilities.draw,
+      color: drawColor,
+    },
+    {
+      key: 'away' as const,
+      label: `${away.name} wins`,
       value: probabilities.awayWin,
+      color: awayColor,
     },
   ].sort((a, b) => b.value - a.value);
+  const topOutcome = outcomes[0]!;
 
   return (
     <section className="card p-4">
       <div className="flex items-center justify-between gap-3">
         <h2 className="font-bold">Prediction</h2>
-        <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-semibold text-brand">
-          {outcomes[0]!.label}
+        <span
+          className="rounded-full px-2 py-0.5 text-xs font-semibold"
+          style={{
+            backgroundColor: withAlpha(topOutcome.color, 0.15),
+            color: topOutcome.color,
+          }}
+        >
+          {topOutcome.label}
         </span>
       </div>
       <div className="mt-4 space-y-3">
         <PredictionRow
-          label={`${home.name} win`}
+          label={`${home.name} wins`}
           value={probabilities.homeWin}
+          color={homeColor}
         />
-        <PredictionRow label="Draw" value={probabilities.draw} />
         <PredictionRow
-          label={`${away.name} win`}
+          label="Draw"
+          value={probabilities.draw}
+          color={drawColor}
+        />
+        <PredictionRow
+          label={`${away.name} wins`}
           value={probabilities.awayWin}
+          color={awayColor}
         />
       </div>
       <p className="mt-3 text-xs text-slate-400">
@@ -224,7 +248,15 @@ function PredictionCard({
   );
 }
 
-function PredictionRow({ label, value }: { label: string; value: number }) {
+function PredictionRow({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: number;
+  color: string;
+}) {
   return (
     <div>
       <div className="mb-1 flex justify-between gap-3 text-sm">
@@ -237,8 +269,11 @@ function PredictionRow({ label, value }: { label: string; value: number }) {
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
         <div
-          className="h-full rounded-full bg-brand transition-all"
-          style={{ width: `${Math.round(value * 100)}%` }}
+          className="h-full rounded-full transition-all"
+          style={{
+            width: `${Math.round(value * 100)}%`,
+            backgroundColor: color,
+          }}
         />
       </div>
     </div>
