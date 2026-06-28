@@ -9,7 +9,7 @@ import { TeamBadge } from '@/components/TeamBadge';
 import type { CommentaryEntry, Match, MatchEvent, Team } from '@/domain/types';
 import { formatDay, formatTime, germanTimeZoneLabel } from '@/lib/datetime';
 import { formatPercent } from '@/lib/labels';
-import { isLiveNow } from '@/lib/matchTime';
+import { isFinished, isLiveNow } from '@/lib/matchTime';
 import { expectedGoals } from '@/lib/model';
 import {
   qualificationStatus,
@@ -44,7 +44,8 @@ export function MatchPage() {
     );
   }
 
-  const played = match.homeGoals !== null && match.awayGoals !== null;
+  const hasScore = match.homeGoals !== null && match.awayGoals !== null;
+  const finished = isFinished(match);
   const live = isLiveNow(match);
   const goalEvents = goals.filter((event) => event.type === 'goal');
   const group =
@@ -66,7 +67,7 @@ export function MatchPage() {
             scorers={goalEvents.filter((event) => event.teamId === home?.id)}
           />
           <div className="flex flex-col items-center gap-1">
-            {played || live ? (
+            {hasScore || live ? (
               <div className="text-3xl font-extrabold tabular-nums">
                 {match.homeGoals ?? 0}
                 <span className="mx-1 text-slate-400">–</span>
@@ -77,7 +78,7 @@ export function MatchPage() {
             )}
             {live ? (
               <StatusBadge status="live" minute={match.minute} />
-            ) : played ? (
+            ) : finished ? (
               <StatusBadge status="finished" />
             ) : null}
           </div>
@@ -88,7 +89,7 @@ export function MatchPage() {
         </div>
       </section>
 
-      {played || live ? (
+      {finished || live ? (
         <MatchDetailsTabs
           activeTab={detailTab}
           onTabChange={setDetailTab}
@@ -100,7 +101,7 @@ export function MatchPage() {
           partial={partialEvents}
           loading={eventsLoading}
           live={live}
-          finished={played}
+          finished={finished}
           homeGoals={match.homeGoals}
           awayGoals={match.awayGoals}
         />
