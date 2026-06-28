@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useNow } from '@/app/NowContext';
 import { useTournament } from '@/app/TournamentContext';
 import { FavoriteStar } from '@/components/FavoriteStar';
 import { OddsBar } from '@/components/OddsBar';
@@ -21,6 +22,7 @@ import { useMatchEvents } from '@/hooks/useMatchEvents';
 export function MatchPage() {
   const { id } = useParams<{ id: string }>();
   const { matches, getTeam, standings } = useTournament();
+  const now = useNow();
   const match = matches.find((m) => m.id === id);
   const [detailTab, setDetailTab] = useState<DetailTab>('events');
 
@@ -46,7 +48,7 @@ export function MatchPage() {
 
   const hasScore = match.homeGoals !== null && match.awayGoals !== null;
   const finished = isFinished(match);
-  const live = isLiveNow(match);
+  const live = isLiveNow(match, now);
   const goalEvents = goals.filter((event) => event.type === 'goal');
   const group =
     match.group !== undefined

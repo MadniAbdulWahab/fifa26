@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNow } from '@/app/NowContext';
 import { useTournament } from '@/app/TournamentContext';
 import { useFavorites } from '@/hooks/useFavorites';
 import { MatchCard } from '@/components/MatchCard';
@@ -11,6 +12,7 @@ type Tab = 'all' | 'group' | 'knockout';
 
 export function FixturesPage() {
   const { matches, standings } = useTournament();
+  const now = useNow();
   const { favorites } = useFavorites();
   const [tab, setTab] = useState<Tab>('all');
   const [favOnly, setFavOnly] = useState(false);
@@ -49,7 +51,7 @@ export function FixturesPage() {
       {tab === 'group' ? (
         <GroupsView standings={standings} matches={matches} isFav={isFav} />
       ) : (
-        <DateList tab={tab} matches={matches} isFav={isFav} />
+        <DateList tab={tab} matches={matches} isFav={isFav} now={now} />
       )}
     </div>
   );
@@ -60,10 +62,12 @@ function DateList({
   tab,
   matches,
   isFav,
+  now,
 }: {
   tab: Tab;
   matches: Match[];
   isFav: (m: Match) => boolean;
+  now: number;
 }) {
   const filtered = useMemo(
     () =>
@@ -75,13 +79,13 @@ function DateList({
   );
 
   const days = useMemo(() => groupByDay(filtered), [filtered]);
-  const anchorId = useMemo(() => findAnchorId(filtered), [filtered]);
+  const anchorId = useMemo(() => findAnchorId(filtered, now), [filtered, now]);
   const anchor = filtered.find((m) => m.id === anchorId);
   const anchorDay = anchor ? dayKey(anchor.kickoff) : undefined;
   const anchorIsUpcoming = Boolean(
-    anchor && !isFinished(anchor) && !isLiveNow(anchor),
+    anchor && !isFinished(anchor) && !isLiveNow(anchor, now),
   );
-  const hasLive = filtered.some((m) => isLiveNow(m));
+  const hasLive = filtered.some((m) => isLiveNow(m, now));
 
   const anchorRef = useScrollToAnchor(`${tab}`, matches.length > 0);
 

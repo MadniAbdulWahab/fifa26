@@ -1,22 +1,17 @@
 import {
   createContext,
+  useEffect,
   useContext,
   useMemo,
+  useState,
   type ReactNode,
 } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { createDataSource } from '@/data/createDataSource';
-import type {
-  GroupStandings,
-  Match,
-  Team,
-  TeamId,
-} from '@/domain/types';
-import {
-  simulateAdvancement,
-  type AdvancementOdds,
-} from '@/lib/advancement';
+import type { GroupStandings, Match, Team, TeamId } from '@/domain/types';
+import { simulateAdvancement, type AdvancementOdds } from '@/lib/advancement';
 import { buildStandings } from '@/lib/standings';
+import { NowContext } from './NowContext';
 
 const dataSource = createDataSource();
 
@@ -42,6 +37,7 @@ const LoadStateContext = createContext<LoadState>({
 });
 
 export function TournamentProvider({ children }: { children: ReactNode }) {
+  const now = useMinuteNow();
   const teamsQuery = useQuery({
     queryKey: ['teams'],
     queryFn: () => dataSource.getTeams(),
@@ -51,6 +47,10 @@ export function TournamentProvider({ children }: { children: ReactNode }) {
     queryFn: () => dataSource.getMatches(),
     // Refetch live scores periodically when using a live source.
     refetchInterval: 60_000,
+    refetchIntervalInBackground: true,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: 'always',
+    staleTime: 0,
   });
 
   const teams = useMemo(() => teamsQuery.data ?? [], [teamsQuery.data]);
@@ -88,9 +88,11 @@ export function TournamentProvider({ children }: { children: ReactNode }) {
 
   return (
     <LoadStateContext.Provider value={loadState}>
-      <TournamentContext.Provider value={value}>
-        {children}
-      </TournamentContext.Provider>
+      <NowContext.Provider value={now}>
+        <TournamentContext.Provider value={value}>
+          {children}
+        </TournamentContext.Provider>
+      </NowContext.Provider>
     </LoadStateContext.Provider>
   );
 }
@@ -105,4 +107,27 @@ export function useTournament(): TournamentData {
 
 export function useLoadState(): LoadState {
   return useContext(LoadStateContext);
+}
+
+function useMinuteNow(): number {
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const update = () => setNow(Date.now());
+    const onVisibilityChange = () => {
+      if (!document.hidden) update();
+    };
+    const interval = window.setInterval(update, 60_000);
+
+    window.addEventListener('focus', update);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener('focus', update);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+  }, []);
+
+  return now;
 }

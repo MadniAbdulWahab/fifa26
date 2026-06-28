@@ -19,6 +19,7 @@ const BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world';
 /** Whole-tournament window — one request returns all 104 fixtures. */
 const RANGE = '20260611-20260719';
 const DEFAULT_RATING = 1700;
+const SCOREBOARD_CACHE_MS = 45_000;
 
 /** ESPN `season.slug` → our stage. */
 const STAGE_BY_SLUG: Record<string, MatchStage> = {
@@ -128,9 +129,15 @@ export function liveClockLabel(
  */
 export class EspnDataSource implements DataSource {
   private scoreboard: Promise<EspnApiEvent[]> | null = null;
+  private scoreboardFetchedAt = 0;
 
   private load(): Promise<EspnApiEvent[]> {
-    if (!this.scoreboard) {
+    const now = Date.now();
+    if (
+      !this.scoreboard ||
+      now - this.scoreboardFetchedAt > SCOREBOARD_CACHE_MS
+    ) {
+      this.scoreboardFetchedAt = now;
       this.scoreboard = fetch(`${BASE}/scoreboard?dates=${RANGE}&limit=500`)
         .then((r) =>
           r.ok

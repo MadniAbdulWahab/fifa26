@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import type { Match } from '@/domain/types';
+import { useNow } from '@/app/NowContext';
 import { useTournament } from '@/app/TournamentContext';
 import { formatKickoff } from '@/lib/datetime';
 import { isLiveNow } from '@/lib/matchTime';
@@ -11,10 +12,11 @@ import { StatusBadge } from './StatusBadge';
 
 export function MatchCard({ match }: { match: Match }) {
   const { getTeam } = useTournament();
+  const now = useNow();
   const home = getTeam(match.homeId);
   const away = getTeam(match.awayId);
   const played = match.homeGoals !== null && match.awayGoals !== null;
-  const live = isLiveNow(match);
+  const live = isLiveNow(match, now);
 
   const homeWon = played && match.homeGoals! > match.awayGoals!;
   const awayWon = played && match.awayGoals! > match.homeGoals!;
