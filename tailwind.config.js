@@ -2,6 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: 'class',
+  // `hover:` styles only apply on devices with a real hover pointer (desktop),
+  // so touch devices don't get sticky hover states while scrolling.
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {
