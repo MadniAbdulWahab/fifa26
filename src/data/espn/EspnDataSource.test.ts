@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { EspnApiEvent } from './espnApiTypes';
 import {
   groupForTeam,
+  liveClockLabel,
   mapEspnEvent,
   mapStage,
   mapState,
@@ -20,6 +21,18 @@ describe('mapStage / mapState', () => {
     expect(mapState('pre')).toBe('scheduled');
     expect(mapState('in')).toBe('live');
     expect(mapState('post')).toBe('finished');
+  });
+});
+
+describe('liveClockLabel', () => {
+  it('prefers ESPN half-time detail over a stale display clock', () => {
+    expect(liveClockLabel('45:00', 'HT')).toBe('HT');
+    expect(liveClockLabel('45:00', 'Halftime')).toBe('HT');
+    expect(liveClockLabel('45:00', 'Half Time Break')).toBe('HT');
+  });
+
+  it('uses the display clock during active play', () => {
+    expect(liveClockLabel("72'", undefined)).toBe("72'");
   });
 });
 
@@ -119,6 +132,18 @@ describe('mapEspnEvent', () => {
     expect(liveM.minute).toBe("72'");
     // Finished/scheduled carry no live minute.
     expect(mapEspnEvent(event())!.minute).toBeUndefined();
+  });
+
+  it('maps half-time to HT even when ESPN also sends a clock', () => {
+    const liveM = mapEspnEvent(
+      event({
+        status: {
+          displayClock: '45:00',
+          type: { state: 'in', shortDetail: 'HT' },
+        },
+      }),
+    )!;
+    expect(liveM.minute).toBe('HT');
   });
 
   it('omits group for knockout matches', () => {

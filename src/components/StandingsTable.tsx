@@ -7,6 +7,19 @@ import { TeamBadge } from './TeamBadge';
 
 export function StandingsTable({ group }: { group: GroupStandings }) {
   const { odds, matches, standings } = useTournament();
+  const rows = group.rows.map((row) => {
+    const status = qualificationStatus(row.team.id, matches, standings);
+    return {
+      row,
+      status,
+      inTopTwoPlace: row.position <= 2,
+      inThirdPlaceRoute: row.position === 3 && status.kind === 'pending',
+    };
+  });
+  const hasTopTwoMarker = rows.some(({ inTopTwoPlace }) => inTopTwoPlace);
+  const hasThirdPlaceRouteMarker = rows.some(
+    ({ inThirdPlaceRoute }) => inThirdPlaceRoute,
+  );
 
   return (
     <div className="card overflow-hidden">
@@ -28,24 +41,22 @@ export function StandingsTable({ group }: { group: GroupStandings }) {
           </tr>
         </thead>
         <tbody>
-          {group.rows.map((row) => {
+          {rows.map(({ row, status, inTopTwoPlace, inThirdPlaceRoute }) => {
             const r = row.record;
             const advance = odds.get(row.team.id)?.advanceFromGroup ?? 0;
-            const status = qualificationStatus(row.team.id, matches, standings);
-            const qualifies = row.position <= 2;
             return (
               <tr
                 key={row.team.id}
                 className={`border-t border-slate-100 dark:border-slate-800/60 ${
-                  qualifies ? 'bg-brand/5' : ''
+                  inTopTwoPlace ? 'bg-brand/5' : ''
                 }`}
               >
                 <td className="py-2 pl-3">
                   <span
                     className={`inline-block h-5 w-1 rounded ${
-                      qualifies
+                      inTopTwoPlace
                         ? 'bg-brand'
-                        : row.position === 3
+                        : inThirdPlaceRoute
                           ? 'bg-amber-400'
                           : 'bg-transparent'
                     }`}
@@ -79,10 +90,21 @@ export function StandingsTable({ group }: { group: GroupStandings }) {
           })}
         </tbody>
       </table>
-      <p className="px-3 py-2 text-xs text-slate-400">
-        <span className="text-brand">▌</span> qualifies&nbsp;&nbsp;
-        <span className="text-amber-400">▌</span> best-third contention
-      </p>
+      {(hasTopTwoMarker || hasThirdPlaceRouteMarker) && (
+        <p className="px-3 py-2 text-xs text-slate-400">
+          {hasTopTwoMarker && (
+            <>
+              <span className="text-brand">▌</span> top-two place
+            </>
+          )}
+          {hasTopTwoMarker && hasThirdPlaceRouteMarker && <>&nbsp;&nbsp;</>}
+          {hasThirdPlaceRouteMarker && (
+            <>
+              <span className="text-amber-400">▌</span> third-place route
+            </>
+          )}
+        </p>
+      )}
     </div>
   );
 }

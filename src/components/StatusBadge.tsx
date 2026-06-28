@@ -12,6 +12,14 @@ export function StatusBadge({
   minute?: string;
 }) {
   if (status === 'live') {
+    if (minute === 'HT') {
+      return (
+        <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/15 px-2 py-0.5 text-xs font-semibold text-amber-500">
+          HT · Break
+        </span>
+      );
+    }
+
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-0.5 text-xs font-semibold tabular-nums text-red-500">
         <span className="h-2 w-2 animate-pulse-live rounded-full bg-red-500" />

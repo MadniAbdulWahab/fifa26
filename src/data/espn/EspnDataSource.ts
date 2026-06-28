@@ -89,7 +89,7 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
 
   const minute =
     status === 'live'
-      ? e.status?.displayClock || e.status?.type?.shortDetail
+      ? liveClockLabel(e.status?.displayClock, e.status?.type?.shortDetail)
       : undefined;
 
   return {
@@ -108,6 +108,16 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
     homeGoals: goals(home.score),
     awayGoals: goals(away.score),
   };
+}
+
+export function liveClockLabel(
+  displayClock: string | undefined,
+  shortDetail: string | undefined,
+): string | undefined {
+  const detail = shortDetail?.trim();
+  if (detail && /^(ht|half|halftime|half-time)$/i.test(detail)) return 'HT';
+  if (detail && /break/i.test(detail)) return 'HT';
+  return displayClock?.trim() || detail || undefined;
 }
 
 /**
