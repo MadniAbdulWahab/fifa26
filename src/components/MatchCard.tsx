@@ -24,7 +24,7 @@ export function MatchCard({ match }: { match: Match }) {
 
   return (
     <div
-      className={`card relative flex items-center gap-3 p-3 transition-colors hover:border-brand/50 ${
+      className={`card relative isolate flex items-center gap-3 p-3 transition-colors hover:border-brand/50 ${
         live ? 'ring-2 ring-red-500 ring-offset-1 ring-offset-transparent' : ''
       }`}
     >
