@@ -6,11 +6,15 @@ import { MatchCard } from '@/components/MatchCard';
 import { NotificationButton } from '@/components/NotificationButton';
 import { OddsBar } from '@/components/OddsBar';
 import { TeamBadge } from '@/components/TeamBadge';
+import {
+  qualificationStatus,
+  type QualificationStatus,
+} from '@/lib/qualification';
 import { computeRecord } from '@/lib/record';
 import { nextMatchForTeam } from '@/lib/teamMatches';
 
 export function FavoritesPage() {
-  const { teams, matches, odds } = useTournament();
+  const { teams, matches, odds, standings } = useTournament();
   const { favorites } = useFavorites();
   useKickoffReminders();
 
@@ -44,6 +48,7 @@ export function FavoritesPage() {
           {favTeams.map((team) => {
             const record = computeRecord(team.id, matches);
             const advance = odds.get(team.id)?.advanceFromGroup ?? 0;
+            const status = qualificationStatus(team.id, matches, standings);
             const next = nextMatchForTeam(team.id, matches);
             return (
               <section key={team.id} className="card p-4">
@@ -54,7 +59,14 @@ export function FavoritesPage() {
                   </span>
                 </div>
                 <div className="mt-3">
-                  <OddsBar value={advance} label="Chance to reach knockouts" />
+                  {status.kind !== 'pending' ? (
+                    <QualificationBadge status={status} />
+                  ) : (
+                    <OddsBar
+                      value={advance}
+                      label="Chance to reach knockouts"
+                    />
+                  )}
                 </div>
                 {next && (
                   <div className="mt-3">
@@ -69,6 +81,19 @@ export function FavoritesPage() {
           })}
         </div>
       )}
+    </div>
+  );
+}
+
+function QualificationBadge({ status }: { status: QualificationStatus }) {
+  const tone =
+    status.kind === 'qualified'
+      ? 'bg-brand/10 text-brand'
+      : 'bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+
+  return (
+    <div className={`rounded-lg px-3 py-2 text-sm font-semibold ${tone}`}>
+      {status.label}
     </div>
   );
 }

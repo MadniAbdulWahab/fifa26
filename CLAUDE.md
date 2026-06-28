@@ -63,6 +63,9 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   - `model.ts` — shared Poisson goal model (expected goals from rating gap).
   - `record.ts` — W/D/L/points from matches.
   - `standings.ts` — group tables, tie-breakers, best-thirds.
+  - `qualification.ts` — settled qualification status. Use before showing
+    "reach knockouts" probabilities so already-qualified/eliminated teams don't
+    get stale odds labels.
   - `bracket.ts` — knockout fixtures seeded from standings; `TBD_TEAM_ID`.
   - `advancement.ts` — Monte-Carlo sim → `{ advanceFromGroup, winTitle }` per team.
   - `datetime.ts` — UTC→German-time formatting (Day.js, fixed `Europe/Berlin`
@@ -90,6 +93,9 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   position** when you return from a match so it doesn't jerk back to "now"), and
   a floating "jump to current match"
   button. `MatchCard` links to `/match/:id`.
+  `MatchPage` has a scoreboard, a separate match-info card (date/time/stadium),
+  a prediction card for upcoming matches, and event/commentary tabs for live or
+  finished matches.
 - `app/`
   - `App.tsx` — layout + routes + loading/error states; `ScrollToTopOnNavigate`
     resets scroll on route change (Fixtures keeps its own anchor scroll).

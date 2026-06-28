@@ -89,7 +89,7 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
 
   const minute =
     status === 'live'
-      ? (e.status?.displayClock || e.status?.type?.shortDetail)
+      ? e.status?.displayClock || e.status?.type?.shortDetail
       : undefined;
 
   return {
@@ -100,6 +100,9 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
     status,
     ...(minute ? { minute } : {}),
     ...(comp.venue?.fullName ? { venue: comp.venue.fullName } : {}),
+    ...(comp.venue?.address?.city
+      ? { venueCity: comp.venue.address.city }
+      : {}),
     homeId: home.team.id,
     awayId: away.team.id,
     homeGoals: goals(home.score),

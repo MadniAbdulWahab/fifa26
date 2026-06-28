@@ -64,10 +64,21 @@ const event = (over: Partial<EspnApiEvent> = {}): EspnApiEvent => ({
   season: { slug: 'group-stage' },
   competitions: [
     {
-      venue: { fullName: 'Estadio Banorte' },
+      venue: {
+        fullName: 'Estadio Banorte',
+        address: { city: 'Monterrey' },
+      },
       competitors: [
-        { homeAway: 'home', score: '2', team: { id: '203', displayName: 'Mexico' } },
-        { homeAway: 'away', score: '0', team: { id: '99', displayName: 'South Africa' } },
+        {
+          homeAway: 'home',
+          score: '2',
+          team: { id: '203', displayName: 'Mexico' },
+        },
+        {
+          homeAway: 'away',
+          score: '0',
+          team: { id: '99', displayName: 'South Africa' },
+        },
       ],
     },
   ],
@@ -83,6 +94,7 @@ describe('mapEspnEvent', () => {
       group: 'A',
       status: 'finished',
       venue: 'Estadio Banorte',
+      venueCity: 'Monterrey',
       homeId: '203',
       awayId: '99',
       homeGoals: 2,
@@ -91,9 +103,7 @@ describe('mapEspnEvent', () => {
   });
 
   it('nulls scores for unplayed matches', () => {
-    const m = mapEspnEvent(
-      event({ status: { type: { state: 'pre' } } }),
-    )!;
+    const m = mapEspnEvent(event({ status: { type: { state: 'pre' } } }))!;
     expect(m.status).toBe('scheduled');
     expect(m.homeGoals).toBeNull();
     expect(m.awayGoals).toBeNull();
@@ -112,9 +122,7 @@ describe('mapEspnEvent', () => {
   });
 
   it('omits group for knockout matches', () => {
-    const m = mapEspnEvent(
-      event({ season: { slug: 'round-of-16' } }),
-    )!;
+    const m = mapEspnEvent(event({ season: { slug: 'round-of-16' } }))!;
     expect(m.stage).toBe('round-of-16');
     expect(m.group).toBeUndefined();
   });

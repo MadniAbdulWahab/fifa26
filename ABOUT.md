@@ -51,8 +51,11 @@ are selectable alternatives.
 ### Match detail page
 
 - Opens when you click a fixture. A Google-style scoreboard: large flags, both
-  teams, score or "vs" + German-time kickoff, stage/group, venue, and a LIVE/FT
-  badge (red ring when live).
+  teams, score or "vs", and a LIVE/FT badge (red ring when live).
+- A dedicated **Match info** card shows stage, date, German-time kickoff,
+  stadium and city when the data source provides them.
+- Upcoming matches show a **Prediction** card with home-win, draw and away-win
+  probabilities from the app's ratings/goal model.
 - Finished/live matches show scorers and goal minutes directly below each team in
   the scoreboard, plus an **Events** tab (goals + assists) and a **Commentary**
   tab with live play-by-play text. These come from a **separate free overlay**,
@@ -61,9 +64,7 @@ are selectable alternatives.
   commentary, no key/proxy — but undocumented); an alternative **TheSportsDB**
   source has only partial goals and no commentary, in which case a **"Partial
   data"** badge is shown.
-- Below it, each team's record (W/D/L, points) and chance to reach the
-  knockouts, and — for group matches — that group's standings table. Tap a team
-  to open its full team page.
+- Tap a team to open its full team page.
 
 ### Standings
 
@@ -101,12 +102,13 @@ are selectable alternatives.
   (**device-local** — no accounts/backend, so they don't sync across devices).
 - The Favorites page shows each followed team's record, advancement bar and next
   match, and a button to **enable kickoff reminders** (browser notifications a
-  few minutes before kickoff while the app is open).
+  few minutes before kickoff while the app is open). Once qualification is
+  settled, advancement bars switch to "Qualified" / "Eliminated" statuses.
 
 ### Team page
 
-- Full record (P/W/D/L/GF/GA/GD/Pts), advancement + title odds bars, and the
-  team's complete match list.
+- Full record (P/W/D/L/GF/GA/GD/Pts), qualification-aware outlook, title odds,
+  and the team's complete match list.
 
 ### Polish
 

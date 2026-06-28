@@ -16,7 +16,14 @@ export interface EspnApiCompetitor {
 }
 
 export interface EspnApiCompetition {
-  venue?: { fullName?: string };
+  venue?: {
+    fullName?: string;
+    address?: {
+      city?: string;
+      state?: string;
+      country?: string;
+    };
+  };
   competitors: EspnApiCompetitor[];
 }
 

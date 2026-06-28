@@ -4,12 +4,16 @@ import { FavoriteStar } from '@/components/FavoriteStar';
 import { MatchCard } from '@/components/MatchCard';
 import { OddsBar } from '@/components/OddsBar';
 import { TeamBadge } from '@/components/TeamBadge';
+import {
+  qualificationStatus,
+  type QualificationStatus,
+} from '@/lib/qualification';
 import { computeRecord } from '@/lib/record';
 import { matchesForTeam } from '@/lib/teamMatches';
 
 export function TeamPage() {
   const { id } = useParams<{ id: string }>();
-  const { getTeam, matches, odds } = useTournament();
+  const { getTeam, matches, odds, standings } = useTournament();
   const team = id ? getTeam(id) : undefined;
 
   if (!team) {
@@ -25,6 +29,7 @@ export function TeamPage() {
 
   const record = computeRecord(team.id, matches);
   const teamOdds = odds.get(team.id);
+  const status = qualificationStatus(team.id, matches, standings);
   const teamMatches = matchesForTeam(team.id, matches);
 
   return (
@@ -58,11 +63,21 @@ export function TeamPage() {
       {teamOdds && (
         <section className="card space-y-3 p-4">
           <h2 className="font-bold">Outlook</h2>
-          <OddsBar
-            value={teamOdds.advanceFromGroup}
-            label="Reach the knockouts"
-          />
-          <OddsBar value={teamOdds.winTitle} label="Win the trophy" tone="title" />
+          {status.kind !== 'pending' ? (
+            <QualificationBadge status={status} />
+          ) : (
+            <OddsBar
+              value={teamOdds.advanceFromGroup}
+              label="Reach the knockouts"
+            />
+          )}
+          {status.kind !== 'eliminated' && (
+            <OddsBar
+              value={teamOdds.winTitle}
+              label="Win the trophy"
+              tone="title"
+            />
+          )}
         </section>
       )}
 
@@ -72,6 +87,19 @@ export function TeamPage() {
           <MatchCard key={m.id} match={m} />
         ))}
       </section>
+    </div>
+  );
+}
+
+function QualificationBadge({ status }: { status: QualificationStatus }) {
+  const tone =
+    status.kind === 'qualified'
+      ? 'bg-brand/10 text-brand'
+      : 'bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+
+  return (
+    <div className={`rounded-lg px-3 py-2 text-sm font-semibold ${tone}`}>
+      {status.label}
     </div>
   );
 }

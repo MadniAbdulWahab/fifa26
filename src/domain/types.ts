@@ -49,6 +49,7 @@ export interface Match {
   /** Live clock label while in progress, e.g. "72'" or "HT" (when available). */
   minute?: string;
   venue?: string;
+  venueCity?: string;
   homeId: TeamId;
   awayId: TeamId;
   /** Goals; null until the match has a score. */

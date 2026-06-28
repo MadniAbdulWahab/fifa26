@@ -8,8 +8,13 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { TeamBadge } from '@/components/TeamBadge';
 import type { CommentaryEntry, Match, MatchEvent, Team } from '@/domain/types';
 import { formatDay, formatTime, germanTimeZoneLabel } from '@/lib/datetime';
-import { matchStageLabel } from '@/lib/labels';
+import { formatPercent } from '@/lib/labels';
 import { isLiveNow } from '@/lib/matchTime';
+import { expectedGoals } from '@/lib/model';
+import {
+  qualificationStatus,
+  type QualificationStatus,
+} from '@/lib/qualification';
 import { computeRecord } from '@/lib/record';
 import { useMatchEvents } from '@/hooks/useMatchEvents';
 
@@ -44,7 +49,7 @@ export function MatchPage() {
   const goalEvents = goals.filter((event) => event.type === 'goal');
   const group =
     match.group !== undefined
-      ? standings.find((g) => g.group === match.group)
+      ? standings.find((standing) => standing.group === match.group)
       : undefined;
 
   return (
@@ -55,12 +60,7 @@ export function MatchPage() {
 
       {/* Scoreboard */}
       <section className={`card p-5 ${live ? 'ring-2 ring-red-500' : ''}`}>
-        <p className="text-center text-xs font-medium text-slate-500">
-          {matchStageLabel(match)} · {formatDay(match.kickoff)}
-          {match.venue ? ` · ${match.venue}` : ''}
-        </p>
-
-        <div className="mt-4 grid grid-cols-3 items-start gap-2">
+        <div className="grid grid-cols-3 items-start gap-2">
           <TeamColumn
             team={home}
             scorers={goalEvents.filter((event) => event.teamId === home?.id)}
@@ -73,15 +73,7 @@ export function MatchPage() {
                 {match.awayGoals ?? 0}
               </div>
             ) : (
-              <>
-                <div className="text-2xl font-bold text-slate-400">vs</div>
-                <div className="text-sm font-semibold">
-                  {formatTime(match.kickoff)}
-                </div>
-                <div className="text-[10px] font-medium text-slate-400">
-                  {germanTimeZoneLabel(match.kickoff)} · German time
-                </div>
-              </>
+              <div className="mt-7 text-2xl font-bold text-slate-400">vs</div>
             )}
             {live ? (
               <StatusBadge status="live" minute={match.minute} />
@@ -108,9 +100,12 @@ export function MatchPage() {
           partial={partialEvents}
           loading={eventsLoading}
           live={live}
+          finished={played}
+          homeGoals={match.homeGoals}
+          awayGoals={match.awayGoals}
         />
       ) : (
-        <TeamOutlookGrid home={home} away={away} matches={matches} />
+        <PredictionCard home={home} away={away} />
       )}
 
       {group && (
@@ -119,8 +114,166 @@ export function MatchPage() {
           <StandingsTable group={group} />
         </section>
       )}
+
+      <MatchInfoCard match={match} />
     </div>
   );
+}
+
+function MatchInfoCard({ match }: { match: Match }) {
+  return (
+    <section className="rounded-lg border border-slate-200 bg-white/70 p-3 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-900/60">
+      <h2 className="font-semibold uppercase tracking-wide text-slate-400">
+        Match info
+      </h2>
+      <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-2">
+        <InfoItem label="Date" value={formatDay(match.kickoff)} />
+        <InfoItem
+          label="Kickoff"
+          value={`${formatTime(match.kickoff)} ${germanTimeZoneLabel(
+            match.kickoff,
+          )}`}
+        />
+        <InfoItem label="Stadium" value={match.venue ?? 'To be announced'} />
+        <InfoItem
+          label="City"
+          value={
+            match.venueCity ?? cityFromVenue(match.venue) ?? 'To be announced'
+          }
+        />
+      </dl>
+    </section>
+  );
+}
+
+function InfoItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-0">
+      <dt className="font-medium text-slate-400">{label}</dt>
+      <dd className="mt-0.5 break-words font-semibold text-slate-600 dark:text-slate-300">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
+function cityFromVenue(venue: string | undefined): string | undefined {
+  if (!venue?.includes(',')) return undefined;
+  return venue.split(',').at(-1)?.trim() || undefined;
+}
+
+function PredictionCard({
+  home,
+  away,
+}: {
+  home: Team | undefined;
+  away: Team | undefined;
+}) {
+  if (!home || !away) {
+    return (
+      <section className="card p-4">
+        <h2 className="font-bold">Prediction</h2>
+        <p className="mt-2 text-sm text-slate-500">
+          Prediction will appear once both teams are confirmed.
+        </p>
+      </section>
+    );
+  }
+
+  const probabilities = predictMatch(home, away);
+  const outcomes = [
+    {
+      key: 'home',
+      label: `${home.name} win`,
+      value: probabilities.homeWin,
+    },
+    { key: 'draw', label: 'Draw', value: probabilities.draw },
+    {
+      key: 'away',
+      label: `${away.name} win`,
+      value: probabilities.awayWin,
+    },
+  ].sort((a, b) => b.value - a.value);
+
+  return (
+    <section className="card p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="font-bold">Prediction</h2>
+        <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-semibold text-brand">
+          {outcomes[0]!.label}
+        </span>
+      </div>
+      <div className="mt-4 space-y-3">
+        <PredictionRow
+          label={`${home.name} win`}
+          value={probabilities.homeWin}
+        />
+        <PredictionRow label="Draw" value={probabilities.draw} />
+        <PredictionRow
+          label={`${away.name} win`}
+          value={probabilities.awayWin}
+        />
+      </div>
+      <p className="mt-3 text-xs text-slate-400">
+        Estimate based on team ratings and a simple goal model.
+      </p>
+    </section>
+  );
+}
+
+function PredictionRow({ label, value }: { label: string; value: number }) {
+  return (
+    <div>
+      <div className="mb-1 flex justify-between gap-3 text-sm">
+        <span className="min-w-0 truncate text-slate-600 dark:text-slate-300">
+          {label}
+        </span>
+        <span className="shrink-0 font-semibold tabular-nums">
+          {formatPercent(value)}
+        </span>
+      </div>
+      <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+        <div
+          className="h-full rounded-full bg-brand transition-all"
+          style={{ width: `${Math.round(value * 100)}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function predictMatch(home: Team, away: Team) {
+  const xg = expectedGoals(home, away);
+  const maxGoals = 10;
+  let homeWin = 0;
+  let draw = 0;
+  let awayWin = 0;
+
+  for (let h = 0; h <= maxGoals; h++) {
+    for (let a = 0; a <= maxGoals; a++) {
+      const p = poissonProbability(h, xg.home) * poissonProbability(a, xg.away);
+      if (h > a) homeWin += p;
+      else if (h === a) draw += p;
+      else awayWin += p;
+    }
+  }
+
+  const total = homeWin + draw + awayWin;
+  return {
+    homeWin: homeWin / total,
+    draw: draw / total,
+    awayWin: awayWin / total,
+  };
+}
+
+function poissonProbability(k: number, lambda: number): number {
+  return (Math.exp(-lambda) * lambda ** k) / factorial(k);
+}
+
+function factorial(n: number): number {
+  let result = 1;
+  for (let i = 2; i <= n; i++) result *= i;
+  return result;
 }
 
 type DetailTab = 'events' | 'commentary' | 'outlook';
@@ -136,6 +289,9 @@ function MatchDetailsTabs({
   partial,
   loading,
   live,
+  finished,
+  homeGoals,
+  awayGoals,
 }: {
   activeTab: DetailTab;
   onTabChange: (tab: DetailTab) => void;
@@ -147,6 +303,9 @@ function MatchDetailsTabs({
   partial: boolean;
   loading: boolean;
   live: boolean;
+  finished: boolean;
+  homeGoals: number | null;
+  awayGoals: number | null;
 }) {
   const tabs: { key: DetailTab; label: string }[] = [
     { key: 'events', label: 'Events' },
@@ -162,7 +321,9 @@ function MatchDetailsTabs({
     <section className="card overflow-hidden">
       <div
         className="grid border-b border-slate-200 text-sm font-semibold dark:border-slate-800"
-        style={{ gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))` }}
+        style={{
+          gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
+        }}
       >
         {tabs.map((t) => (
           <button
@@ -191,6 +352,9 @@ function MatchDetailsTabs({
             away={away}
             partial={partial}
             loading={loading}
+            finished={finished}
+            homeGoals={homeGoals}
+            awayGoals={awayGoals}
           />
         ) : current === 'commentary' ? (
           <MatchCommentary commentary={commentary} live={live} />
@@ -225,7 +389,9 @@ function MatchCommentary({
             <span className="w-10 shrink-0 text-sm font-semibold tabular-nums text-brand">
               {c.minute ?? ''}
             </span>
-            <p className="text-sm text-slate-600 dark:text-slate-300">{c.text}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">
+              {c.text}
+            </p>
           </li>
         ))}
       </ol>
@@ -239,12 +405,18 @@ function MatchEvents({
   away,
   partial,
   loading,
+  finished,
+  homeGoals,
+  awayGoals,
 }: {
   events: MatchEvent[];
   home: Team | undefined;
   away: Team | undefined;
   partial: boolean;
   loading: boolean;
+  finished: boolean;
+  homeGoals: number | null;
+  awayGoals: number | null;
 }) {
   const teamName = (teamId: string) => {
     if (teamId === home?.id) return home.name;
@@ -296,11 +468,26 @@ function MatchEvents({
         </>
       ) : (
         <p className="mt-2 text-sm text-slate-500">
-          Scorer details aren’t available for this match yet.
+          {emptyEventsMessage({ finished, homeGoals, awayGoals })}
         </p>
       )}
     </div>
   );
+}
+
+function emptyEventsMessage({
+  finished,
+  homeGoals,
+  awayGoals,
+}: {
+  finished: boolean;
+  homeGoals: number | null;
+  awayGoals: number | null;
+}): string {
+  if (!finished) return 'No goals have been scored in this match yet.';
+  const totalGoals = (homeGoals ?? 0) + (awayGoals ?? 0);
+  if (totalGoals === 0) return 'No goals were scored in this match.';
+  return 'Scorer details are not available for this finished match.';
 }
 
 function TeamColumn({
@@ -400,9 +587,10 @@ function TeamOutlook({
   matches: Match[];
   framed?: boolean;
 }) {
-  const { odds } = useTournament();
+  const { odds, standings } = useTournament();
   const record = computeRecord(team.id, matches);
   const teamOdds = odds.get(team.id);
+  const status = qualificationStatus(team.id, matches, standings);
 
   return (
     <div
@@ -420,9 +608,24 @@ function TeamOutlook({
         {record.wins}W · {record.draws}D · {record.losses}L · {record.points}{' '}
         pts
       </p>
-      {teamOdds && (
+      {status.kind !== 'pending' ? (
+        <QualificationBadge status={status} />
+      ) : teamOdds ? (
         <OddsBar value={teamOdds.advanceFromGroup} label="Reach knockouts" />
-      )}
+      ) : null}
+    </div>
+  );
+}
+
+function QualificationBadge({ status }: { status: QualificationStatus }) {
+  const tone =
+    status.kind === 'qualified'
+      ? 'bg-brand/10 text-brand'
+      : 'bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+
+  return (
+    <div className={`rounded-lg px-3 py-2 text-sm font-semibold ${tone}`}>
+      {status.label}
     </div>
   );
 }
