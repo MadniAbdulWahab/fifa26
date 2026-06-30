@@ -56,4 +56,27 @@ describe('simulateAdvancement', () => {
     const b = simulateAdvancement(teams, matches, { iterations: 300, seed: 7 });
     expect(a.get('t1')!.winTitle).toBe(b.get('t1')!.winTitle);
   });
+
+  it('sets title odds to zero for teams eliminated in knockouts', () => {
+    const { teams, matches } = clinchedGroup();
+    const odds = simulateAdvancement(
+      teams,
+      [
+        ...matches,
+        {
+          id: 'ko-t1',
+          stage: 'round-of-32',
+          kickoff: '2026-06-28T16:00:00Z',
+          status: 'finished',
+          homeId: 't1',
+          awayId: 't2',
+          homeGoals: 0,
+          awayGoals: 1,
+        },
+      ],
+      { iterations: 300, seed: 7 },
+    );
+
+    expect(odds.get('t1')!.winTitle).toBe(0);
+  });
 });

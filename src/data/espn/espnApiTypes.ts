@@ -12,6 +12,7 @@ export interface EspnApiTeam {
 export interface EspnApiCompetitor {
   homeAway: 'home' | 'away';
   score?: string;
+  winner?: boolean;
   team: EspnApiTeam;
 }
 

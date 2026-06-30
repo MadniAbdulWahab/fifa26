@@ -146,6 +146,34 @@ describe('mapEspnEvent', () => {
     expect(liveM.minute).toBe('HT');
   });
 
+  it('carries ESPN winner flag for finished knockout ties', () => {
+    const m = mapEspnEvent(
+      event({
+        season: { slug: 'round-of-32' },
+        competitions: [
+          {
+            competitors: [
+              {
+                homeAway: 'home',
+                score: '1',
+                winner: false,
+                team: { id: '203', displayName: 'Mexico' },
+              },
+              {
+                homeAway: 'away',
+                score: '1',
+                winner: true,
+                team: { id: '99', displayName: 'South Africa' },
+              },
+            ],
+          },
+        ],
+      }),
+    )!;
+
+    expect(m.winnerId).toBe('99');
+  });
+
   it('omits group for knockout matches', () => {
     const m = mapEspnEvent(event({ season: { slug: 'round-of-16' } }))!;
     expect(m.stage).toBe('round-of-16');

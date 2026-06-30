@@ -55,6 +55,8 @@ export interface Match {
   /** Goals; null until the match has a score. */
   homeGoals: number | null;
   awayGoals: number | null;
+  /** Winner after extra time / penalties when the provider supplies it. */
+  winnerId?: TeamId;
   events?: MatchEvent[];
   eventSource?: 'official' | 'sample';
 }

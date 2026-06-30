@@ -92,6 +92,14 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
     status === 'live'
       ? liveClockLabel(e.status?.displayClock, e.status?.type?.shortDetail)
       : undefined;
+  const winnerId =
+    status === 'finished'
+      ? home.winner
+        ? home.team.id
+        : away.winner
+          ? away.team.id
+          : undefined
+      : undefined;
 
   return {
     id: e.id,
@@ -108,6 +116,7 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
     awayId: away.team.id,
     homeGoals: goals(home.score),
     awayGoals: goals(away.score),
+    ...(winnerId ? { winnerId } : {}),
   };
 }
 
