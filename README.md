@@ -14,7 +14,8 @@ Live app: https://madniabdulwahab.github.io/fifa26/
   commentary when available, prediction, group context, and match info.
 - Shows group standings with qualification indicators.
 - Supports team favorites and kickoff reminders.
-- Includes a knockout bracket and advancement/title odds.
+- Includes a knockout bracket (official FIFA 2026 tree layout, with a compact
+  per-round view) and advancement/title odds.
 - Works as a PWA, so it can be added to the phone home screen.
 - Supports light and dark mode.
 

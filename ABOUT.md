@@ -91,9 +91,17 @@ are selectable alternatives.
 
 ### Knockout bracket
 
-- Columns for Round of 32 → Round of 16 → Quarter-finals → Semi-finals → Final.
-- The Round of 32 is seeded from the group standings (ranked 1–32, paired
-  1‑v‑32, 2‑v‑31, …). Later rounds show "TBD" until results decide them.
+- Columns for Round of 32 → Round of 16 → Quarter-finals → Semi-finals → Final,
+  laid out as a connected **tree**: each match sits between the two matches whose
+  winners feed it, following the official FIFA 2026 bracket path, with connector
+  lines drawn between the rounds.
+- With live data the Round of 32 shows the real matchups; the offline source
+  seeds it from the group standings into the official bracket slots. Later rounds
+  show "TBD" until results decide them.
+- The round buttons (R32 / R16 / QF / SF / Final) jump to a round and switch to a
+  **compact view** — every round top-aligned with tight gaps — so a round is easy
+  to scan without the tall tree. A **Tree / Compact** toggle switches back to the
+  full aligned bracket.
 - A **Title contenders** panel ranks teams by simulated trophy odds.
 
 ### Favorites & reminders
@@ -194,7 +202,8 @@ PWA, dark mode, unit tests, both data sources, GitHub Pages deploy.
 **Possible next steps:**
 
 - Plug in real WC2026 draw/schedule data (or the live API token).
-- Official FIFA bracket-slotting rules for best-third placement.
+- Official FIFA best-third allocation table (the offline bracket assigns
+  third-placed teams greedily rather than via FIFA's exact lookup table).
 - Head-to-head tie-breakers in standings.
 - Service-worker Push for reminders when the app is closed.
 - Goal-scorer / lineup details per match.

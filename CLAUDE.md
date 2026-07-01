@@ -66,7 +66,14 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   - `qualification.ts` — settled qualification status. Use before showing
     "reach knockouts" probabilities so already-qualified/eliminated teams don't
     get stale odds labels.
-  - `bracket.ts` — knockout fixtures seeded from standings; `TBD_TEAM_ID`.
+  - `bracket.ts` — knockout fixtures seeded from standings into the official
+    FIFA 2026 Round-of-32 slots (`OFFICIAL_R32_SLOTS`, top-to-bottom bracket
+    order); `TBD_TEAM_ID`. Best-third opponents assigned greedily.
+  - `bracketLayout.ts` — `bracketSlots(matches, standings)` gives each knockout
+    match its **slot** (top-to-bottom tree position) so the Bracket lines up like
+    the real tournament. Resolves via built ids (static), R32 group placement,
+    then winner-chaining up the tree (`slot = floor(feederSlot/2)`), falling back
+    to kickoff order. `COLUMN_STAGES` lists the five bracket rounds.
   - `advancement.ts` — Monte-Carlo sim → `{ advanceFromGroup, winTitle }` per team.
   - `datetime.ts` — UTC→German-time formatting (Day.js, fixed `Europe/Berlin`
     via `APP_TIME_ZONE`). All kickoff display goes here; `germanTimeZoneLabel()`
@@ -84,7 +91,10 @@ commit messages with the `Co-Authored-By: Claude` trailer.
   re-polls every 30s while it is live).
 - `components/` — presentational UI (MatchCard, StandingsTable, Bracket,
   OddsBar, TitleOdds, TeamBadge, FavoriteStar, StatusBadge, ThemeToggle,
-  NotificationButton).
+  NotificationButton). `Bracket` orders columns by `bracketSlots` and renders a
+  connected tree (fixed-height columns + CSS pseudo-element connectors) in **tree
+  mode**, or top-aligned tight columns in **compact mode**; the round tabs jump
+  to a round and switch to compact, and a Tree/Compact toggle flips back.
 - `pages/` — routed screens: Fixtures, Standings, Bracket, Team
   (`/team/:id`), **Match** (`/match/:id`, the match detail page), Favorites.
   `FixturesPage` holds the All/Groups/Knockouts tabs, the Groups A-L selector,
