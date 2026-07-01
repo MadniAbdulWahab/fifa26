@@ -68,6 +68,22 @@ export function resolveEspnTeam(t: EspnApiTeam): Team {
   };
 }
 
+function normaliseTeamId(t: EspnApiTeam): string {
+  const placeholder = t.displayName?.match(
+    /^(Round of 32|Round of 16|Quarterfinal|Semifinal) (\d+) Winner$/i,
+  );
+  if (!placeholder) return t.id;
+
+  const stageByLabel: Record<string, MatchStage> = {
+    'round of 32': 'round-of-32',
+    'round of 16': 'round-of-16',
+    quarterfinal: 'quarter-final',
+    semifinal: 'semi-final',
+  };
+  const stage = stageByLabel[placeholder[1]!.toLowerCase()];
+  return stage ? `winner:${stage}:${placeholder[2]}` : t.id;
+}
+
 /** Map one ESPN scoreboard event to a `Match`, or null if malformed. */
 export function mapEspnEvent(e: EspnApiEvent): Match | null {
   const comp = e.competitions[0];
@@ -112,8 +128,8 @@ export function mapEspnEvent(e: EspnApiEvent): Match | null {
     ...(comp.venue?.address?.city
       ? { venueCity: comp.venue.address.city }
       : {}),
-    homeId: home.team.id,
-    awayId: away.team.id,
+    homeId: normaliseTeamId(home.team),
+    awayId: normaliseTeamId(away.team),
     homeGoals: goals(home.score),
     awayGoals: goals(away.score),
     ...(winnerId ? { winnerId } : {}),

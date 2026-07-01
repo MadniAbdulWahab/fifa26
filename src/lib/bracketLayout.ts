@@ -1,9 +1,4 @@
-import type {
-  GroupStandings,
-  Match,
-  MatchStage,
-  TeamId,
-} from '@/domain/types';
+import type { GroupStandings, Match, MatchStage, TeamId } from '@/domain/types';
 import { isSeedRef, OFFICIAL_R32_SLOTS, TBD_TEAM_ID } from './bracket';
 
 /**
@@ -40,6 +35,15 @@ const R32_SLOT_BY_SEED: Map<string, number> = (() => {
 
 /** Static-source ids encode their slot, e.g. `ko-round-of-16-3` → slot 2. */
 const BUILT_ID = /^ko-.+-(\d+)$/;
+const WINNER_REF_ID =
+  /^winner:(round-of-32|round-of-16|quarter-final|semi-final):(\d+)$/;
+
+const PREVIOUS_STAGE: Partial<Record<MatchStage, MatchStage>> = {
+  'round-of-16': 'round-of-32',
+  'quarter-final': 'round-of-16',
+  'semi-final': 'quarter-final',
+  final: 'semi-final',
+};
 
 function winnerOf(match: Match): TeamId | undefined {
   if (match.winnerId) return match.winnerId;
@@ -48,6 +52,24 @@ function winnerOf(match: Match): TeamId | undefined {
     if (match.awayGoals > match.homeGoals) return match.awayId;
   }
   return undefined;
+}
+
+function winnerRef(
+  teamId: TeamId,
+): { stage: MatchStage; ordinal: number } | null {
+  const match = WINNER_REF_ID.exec(teamId);
+  if (!match) return null;
+  return { stage: match[1] as MatchStage, ordinal: Number(match[2]) };
+}
+
+function matchForWinnerRef(
+  teamId: TeamId,
+  previousStage: MatchStage,
+  previousMatches: Match[],
+): Match | undefined {
+  const ref = winnerRef(teamId);
+  if (ref?.stage !== previousStage) return undefined;
+  return previousMatches[ref.ordinal - 1];
 }
 
 /**
@@ -102,11 +124,60 @@ export function bracketSlots(
   }
 
   const byStage = new Map<MatchStage, Match[]>();
+  const fallbackByStage = new Map<MatchStage, Match[]>();
   for (const match of matches) {
     if (!COLUMN_STAGES.includes(match.stage)) continue;
     const arr = byStage.get(match.stage) ?? [];
     arr.push(match);
     byStage.set(match.stage, arr);
+  }
+
+  for (const stage of COLUMN_STAGES) {
+    const stageMatches = byStage.get(stage) ?? [];
+    fallbackByStage.set(
+      stage,
+      [...stageMatches].sort((a, b) =>
+        a.kickoff === b.kickoff
+          ? a.id.localeCompare(b.id, undefined, { numeric: true })
+          : a.kickoff.localeCompare(b.kickoff),
+      ),
+    );
+  }
+
+  const slotHints = new Map<string, number>();
+  for (let i = COLUMN_STAGES.length - 1; i > 0; i -= 1) {
+    const stage = COLUMN_STAGES[i]!;
+    const previousStage = PREVIOUS_STAGE[stage];
+    if (!previousStage) continue;
+
+    const stageMatches = fallbackByStage.get(stage) ?? [];
+    const previousMatches = fallbackByStage.get(previousStage) ?? [];
+
+    const previousByTeam = new Map<TeamId, Match>();
+    for (const previousMatch of previousMatches) {
+      for (const teamId of [
+        previousMatch.homeId,
+        previousMatch.awayId,
+        winnerOf(previousMatch),
+      ]) {
+        if (teamId && teamId !== TBD_TEAM_ID) {
+          previousByTeam.set(teamId, previousMatch);
+        }
+      }
+    }
+
+    for (const [matchIndex, match] of stageMatches.entries()) {
+      const slot = slotHints.get(match.id) ?? matchIndex;
+      for (const [sideIndex, teamId] of [
+        match.homeId,
+        match.awayId,
+      ].entries()) {
+        const feeder =
+          matchForWinnerRef(teamId, previousStage, previousMatches) ??
+          previousByTeam.get(teamId);
+        if (feeder) slotHints.set(feeder.id, slot * 2 + sideIndex);
+      }
+    }
   }
 
   const result = new Map<string, number>();
@@ -123,6 +194,7 @@ export function bracketSlots(
     const winnerSlot = new Map<TeamId, number>();
     for (const match of stageMatches) {
       const slot =
+        slotHints.get(match.id) ??
         resolveSlot(match, stage, seedByTeam, prevWinnerSlot) ??
         fallback.indexOf(match);
       result.set(match.id, slot);

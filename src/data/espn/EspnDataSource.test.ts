@@ -179,4 +179,33 @@ describe('mapEspnEvent', () => {
     expect(m.stage).toBe('round-of-16');
     expect(m.group).toBeUndefined();
   });
+
+  it('normalises ESPN knockout winner placeholders into bracket references', () => {
+    const m = mapEspnEvent(
+      event({
+        season: { slug: 'round-of-16' },
+        status: { type: { state: 'pre' } },
+        competitions: [
+          {
+            competitors: [
+              {
+                homeAway: 'home',
+                team: {
+                  id: '131532',
+                  displayName: 'Round of 32 8 Winner',
+                },
+              },
+              {
+                homeAway: 'away',
+                team: { id: '203', displayName: 'Mexico' },
+              },
+            ],
+          },
+        ],
+      }),
+    )!;
+
+    expect(m.homeId).toBe('winner:round-of-32:8');
+    expect(m.awayId).toBe('203');
+  });
 });

@@ -119,6 +119,65 @@ describe('bracketSlots', () => {
     expect(slots.get('qf')).toBe(0);
   });
 
+  it('uses known next-round fixtures to line up previous-round cards', () => {
+    const matches: Match[] = [
+      ko('r32-1', 'round-of-32', 'rsa', 'can', {
+        winner: 'can',
+        kickoff: '2026-06-28T19:00:00Z',
+      }),
+      ko('r32-2', 'round-of-32', 'bra', 'jpn', {
+        winner: 'bra',
+        kickoff: '2026-06-29T17:00:00Z',
+      }),
+      ko('r32-3', 'round-of-32', 'ger', 'par', {
+        winner: 'par',
+        kickoff: '2026-06-29T20:30:00Z',
+      }),
+      ko('r32-4', 'round-of-32', 'ned', 'mar', {
+        winner: 'mar',
+        kickoff: '2026-06-30T01:00:00Z',
+      }),
+      ko('r32-6', 'round-of-32', 'fra', 'swe', {
+        winner: 'fra',
+        kickoff: '2026-06-30T21:00:00Z',
+      }),
+      ko('r16-1', 'round-of-16', 'can', 'mar', {
+        kickoff: '2026-07-04T17:00:00Z',
+      }),
+      ko('r16-2', 'round-of-16', 'par', 'fra', {
+        kickoff: '2026-07-04T21:00:00Z',
+      }),
+    ];
+
+    const slots = bracketSlots(matches, []);
+    expect(slots.get('r32-1')).toBe(0);
+    expect(slots.get('r32-4')).toBe(1);
+    expect(slots.get('r32-3')).toBe(2);
+    expect(slots.get('r32-6')).toBe(3);
+    expect(slots.get('r16-1')).toBe(0);
+    expect(slots.get('r16-2')).toBe(1);
+  });
+
+  it('uses provider winner placeholders to attach unresolved feeder matches', () => {
+    const matches: Match[] = [
+      ko('r32-1', 'round-of-32', 'mex', 'ecu', {
+        winner: 'mex',
+        kickoff: '2026-07-01T02:00:00Z',
+      }),
+      ko('r32-2', 'round-of-32', 'eng', 'cod', {
+        kickoff: '2026-07-01T16:00:00Z',
+      }),
+      ko('r16-1', 'round-of-16', 'mex', 'winner:round-of-32:2', {
+        kickoff: '2026-07-06T00:00:00Z',
+      }),
+    ];
+
+    const slots = bracketSlots(matches, []);
+    expect(slots.get('r32-1')).toBe(0);
+    expect(slots.get('r32-2')).toBe(1);
+    expect(slots.get('r16-1')).toBe(0);
+  });
+
   it('falls back to kickoff order when a match cannot be resolved', () => {
     const matches: Match[] = [
       ko('late', 'round-of-32', 'p', 'q', { kickoff: '2026-06-28T22:00:00Z' }),
