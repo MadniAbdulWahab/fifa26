@@ -1,8 +1,7 @@
 # About the World Cup 2026 companion app
 
 A complete description of what this app is, what it does, and how every part of
-it works. For setup/commands see [README.md](README.md); for an AI-oriented
-codebase map see [CLAUDE.md](CLAUDE.md).
+it works. For setup and commands, see [README.md](README.md).
 
 ---
 
