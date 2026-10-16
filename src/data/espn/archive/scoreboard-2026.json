@@ -1,0 +1,4893 @@
+{
+ "archivedAt": "2026-10-16T21:12:00.420Z",
+ "events": [
+  {
+   "id": "760415",
+   "date": "2026-06-11T19:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Banorte",
+      "address": {
+       "city": "Mexico City",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "203",
+        "abbreviation": "MEX",
+        "displayName": "Mexico"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "467",
+        "abbreviation": "RSA",
+        "displayName": "South Africa"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760414",
+   "date": "2026-06-12T02:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Akron",
+      "address": {
+       "city": "Guadalajara",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "451",
+        "abbreviation": "KOR",
+        "displayName": "South Korea"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "450",
+        "abbreviation": "CZE",
+        "displayName": "Czechia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760416",
+   "date": "2026-06-12T19:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "206",
+        "abbreviation": "CAN",
+        "displayName": "Canada"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "452",
+        "abbreviation": "BIH",
+        "displayName": "Bosnia-Herzegovina"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760417",
+   "date": "2026-06-13T01:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "660",
+        "abbreviation": "USA",
+        "displayName": "United States"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "210",
+        "abbreviation": "PAR",
+        "displayName": "Paraguay"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760420",
+   "date": "2026-06-13T19:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4398",
+        "abbreviation": "QAT",
+        "displayName": "Qatar"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760419",
+   "date": "2026-06-13T22:00Z",
+   "status": {
+    "displayClock": "90'+25'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "205",
+        "abbreviation": "BRA",
+        "displayName": "Brazil"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760418",
+   "date": "2026-06-14T01:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2654",
+        "abbreviation": "HAI",
+        "displayName": "Haiti"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "580",
+        "abbreviation": "SCO",
+        "displayName": "Scotland"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760421",
+   "date": "2026-06-14T04:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "628",
+        "abbreviation": "AUS",
+        "displayName": "Australia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "465",
+        "abbreviation": "TUR",
+        "displayName": "Türkiye"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760422",
+   "date": "2026-06-14T17:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "7",
+       "winner": true,
+       "team": {
+        "id": "481",
+        "abbreviation": "GER",
+        "displayName": "Germany"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "11678",
+        "abbreviation": "CUW",
+        "displayName": "Curaçao"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760425",
+   "date": "2026-06-14T20:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "449",
+        "abbreviation": "NED",
+        "displayName": "Netherlands"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "627",
+        "abbreviation": "JPN",
+        "displayName": "Japan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760423",
+   "date": "2026-06-14T23:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "4789",
+        "abbreviation": "CIV",
+        "displayName": "Ivory Coast"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "209",
+        "abbreviation": "ECU",
+        "displayName": "Ecuador"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760424",
+   "date": "2026-06-15T02:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio BBVA",
+      "address": {
+       "city": "Guadalupe",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "5",
+       "winner": true,
+       "team": {
+        "id": "466",
+        "abbreviation": "SWE",
+        "displayName": "Sweden"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "659",
+        "abbreviation": "TUN",
+        "displayName": "Tunisia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760428",
+   "date": "2026-06-15T16:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2597",
+        "abbreviation": "CPV",
+        "displayName": "Cape Verde"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760426",
+   "date": "2026-06-15T19:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2620",
+        "abbreviation": "EGY",
+        "displayName": "Egypt"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760429",
+   "date": "2026-06-15T22:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "655",
+        "abbreviation": "KSA",
+        "displayName": "Saudi Arabia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "212",
+        "abbreviation": "URU",
+        "displayName": "Uruguay"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760427",
+   "date": "2026-06-16T01:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "469",
+        "abbreviation": "IRN",
+        "displayName": "Iran"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "2666",
+        "abbreviation": "NZL",
+        "displayName": "New Zealand"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760432",
+   "date": "2026-06-16T19:00Z",
+   "status": {
+    "displayClock": "90'+10'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "654",
+        "abbreviation": "SEN",
+        "displayName": "Senegal"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760430",
+   "date": "2026-06-16T22:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4375",
+        "abbreviation": "IRQ",
+        "displayName": "Iraq"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760433",
+   "date": "2026-06-17T01:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "624",
+        "abbreviation": "ALG",
+        "displayName": "Algeria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760431",
+   "date": "2026-06-17T04:00Z",
+   "status": {
+    "displayClock": "90'+14'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "474",
+        "abbreviation": "AUT",
+        "displayName": "Austria"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2917",
+        "abbreviation": "JOR",
+        "displayName": "Jordan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760435",
+   "date": "2026-06-17T17:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "482",
+        "abbreviation": "POR",
+        "displayName": "Portugal"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2850",
+        "abbreviation": "COD",
+        "displayName": "Congo DR"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760437",
+   "date": "2026-06-17T20:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "477",
+        "abbreviation": "CRO",
+        "displayName": "Croatia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760434",
+   "date": "2026-06-17T23:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "4469",
+        "abbreviation": "GHA",
+        "displayName": "Ghana"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2659",
+        "abbreviation": "PAN",
+        "displayName": "Panama"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760436",
+   "date": "2026-06-18T02:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Banorte",
+      "address": {
+       "city": "Mexico City",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2570",
+        "abbreviation": "UZB",
+        "displayName": "Uzbekistan"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "208",
+        "abbreviation": "COL",
+        "displayName": "Colombia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760438",
+   "date": "2026-06-18T16:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "450",
+        "abbreviation": "CZE",
+        "displayName": "Czechia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "467",
+        "abbreviation": "RSA",
+        "displayName": "South Africa"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760439",
+   "date": "2026-06-18T19:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "452",
+        "abbreviation": "BIH",
+        "displayName": "Bosnia-Herzegovina"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760440",
+   "date": "2026-06-18T22:00Z",
+   "status": {
+    "displayClock": "90'+10'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "6",
+       "winner": true,
+       "team": {
+        "id": "206",
+        "abbreviation": "CAN",
+        "displayName": "Canada"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "4398",
+        "abbreviation": "QAT",
+        "displayName": "Qatar"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760441",
+   "date": "2026-06-19T01:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Akron",
+      "address": {
+       "city": "Guadalajara",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "203",
+        "abbreviation": "MEX",
+        "displayName": "Mexico"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "451",
+        "abbreviation": "KOR",
+        "displayName": "South Korea"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760442",
+   "date": "2026-06-19T19:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "660",
+        "abbreviation": "USA",
+        "displayName": "United States"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "628",
+        "abbreviation": "AUS",
+        "displayName": "Australia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760445",
+   "date": "2026-06-19T22:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "580",
+        "abbreviation": "SCO",
+        "displayName": "Scotland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760444",
+   "date": "2026-06-20T00:30Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "205",
+        "abbreviation": "BRA",
+        "displayName": "Brazil"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2654",
+        "abbreviation": "HAI",
+        "displayName": "Haiti"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760443",
+   "date": "2026-06-20T03:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "465",
+        "abbreviation": "TUR",
+        "displayName": "Türkiye"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "210",
+        "abbreviation": "PAR",
+        "displayName": "Paraguay"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760447",
+   "date": "2026-06-20T17:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "5",
+       "winner": true,
+       "team": {
+        "id": "449",
+        "abbreviation": "NED",
+        "displayName": "Netherlands"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "466",
+        "abbreviation": "SWE",
+        "displayName": "Sweden"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760448",
+   "date": "2026-06-20T20:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "481",
+        "abbreviation": "GER",
+        "displayName": "Germany"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4789",
+        "abbreviation": "CIV",
+        "displayName": "Ivory Coast"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760446",
+   "date": "2026-06-21T00:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "209",
+        "abbreviation": "ECU",
+        "displayName": "Ecuador"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "11678",
+        "abbreviation": "CUW",
+        "displayName": "Curaçao"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760449",
+   "date": "2026-06-21T04:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio BBVA",
+      "address": {
+       "city": "Guadalupe",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "659",
+        "abbreviation": "TUN",
+        "displayName": "Tunisia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "627",
+        "abbreviation": "JPN",
+        "displayName": "Japan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760453",
+   "date": "2026-06-21T16:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "655",
+        "abbreviation": "KSA",
+        "displayName": "Saudi Arabia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760451",
+   "date": "2026-06-21T19:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "469",
+        "abbreviation": "IRN",
+        "displayName": "Iran"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760450",
+   "date": "2026-06-21T22:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "212",
+        "abbreviation": "URU",
+        "displayName": "Uruguay"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "2597",
+        "abbreviation": "CPV",
+        "displayName": "Cape Verde"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760452",
+   "date": "2026-06-22T01:00Z",
+   "status": {
+    "displayClock": "90'+10'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2666",
+        "abbreviation": "NZL",
+        "displayName": "New Zealand"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "2620",
+        "abbreviation": "EGY",
+        "displayName": "Egypt"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760456",
+   "date": "2026-06-22T17:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "474",
+        "abbreviation": "AUT",
+        "displayName": "Austria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760457",
+   "date": "2026-06-22T21:00Z",
+   "status": {
+    "displayClock": "90'+2'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "4375",
+        "abbreviation": "IRQ",
+        "displayName": "Iraq"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760454",
+   "date": "2026-06-23T00:00Z",
+   "status": {
+    "displayClock": "90'+10'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "654",
+        "abbreviation": "SEN",
+        "displayName": "Senegal"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760455",
+   "date": "2026-06-23T03:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2917",
+        "abbreviation": "JOR",
+        "displayName": "Jordan"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "624",
+        "abbreviation": "ALG",
+        "displayName": "Algeria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760461",
+   "date": "2026-06-23T17:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "5",
+       "winner": true,
+       "team": {
+        "id": "482",
+        "abbreviation": "POR",
+        "displayName": "Portugal"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2570",
+        "abbreviation": "UZB",
+        "displayName": "Uzbekistan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760458",
+   "date": "2026-06-23T20:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "4469",
+        "abbreviation": "GHA",
+        "displayName": "Ghana"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760460",
+   "date": "2026-06-23T23:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2659",
+        "abbreviation": "PAN",
+        "displayName": "Panama"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "477",
+        "abbreviation": "CRO",
+        "displayName": "Croatia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760459",
+   "date": "2026-06-24T02:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Akron",
+      "address": {
+       "city": "Guadalajara",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "208",
+        "abbreviation": "COL",
+        "displayName": "Colombia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2850",
+        "abbreviation": "COD",
+        "displayName": "Congo DR"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760462",
+   "date": "2026-06-24T19:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "452",
+        "abbreviation": "BIH",
+        "displayName": "Bosnia-Herzegovina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4398",
+        "abbreviation": "QAT",
+        "displayName": "Qatar"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760463",
+   "date": "2026-06-24T19:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "206",
+        "abbreviation": "CAN",
+        "displayName": "Canada"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760464",
+   "date": "2026-06-24T22:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "2654",
+        "abbreviation": "HAI",
+        "displayName": "Haiti"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760465",
+   "date": "2026-06-24T22:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "580",
+        "abbreviation": "SCO",
+        "displayName": "Scotland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "205",
+        "abbreviation": "BRA",
+        "displayName": "Brazil"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760467",
+   "date": "2026-06-25T01:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Banorte",
+      "address": {
+       "city": "Mexico City",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "450",
+        "abbreviation": "CZE",
+        "displayName": "Czechia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "203",
+        "abbreviation": "MEX",
+        "displayName": "Mexico"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760466",
+   "date": "2026-06-25T01:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio BBVA",
+      "address": {
+       "city": "Guadalupe",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "467",
+        "abbreviation": "RSA",
+        "displayName": "South Africa"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "451",
+        "abbreviation": "KOR",
+        "displayName": "South Korea"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760473",
+   "date": "2026-06-25T20:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "11678",
+        "abbreviation": "CUW",
+        "displayName": "Curaçao"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "4789",
+        "abbreviation": "CIV",
+        "displayName": "Ivory Coast"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760468",
+   "date": "2026-06-25T20:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "209",
+        "abbreviation": "ECU",
+        "displayName": "Ecuador"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "481",
+        "abbreviation": "GER",
+        "displayName": "Germany"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760471",
+   "date": "2026-06-25T23:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "627",
+        "abbreviation": "JPN",
+        "displayName": "Japan"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "466",
+        "abbreviation": "SWE",
+        "displayName": "Sweden"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760472",
+   "date": "2026-06-25T23:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "659",
+        "abbreviation": "TUN",
+        "displayName": "Tunisia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "449",
+        "abbreviation": "NED",
+        "displayName": "Netherlands"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760469",
+   "date": "2026-06-26T02:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "210",
+        "abbreviation": "PAR",
+        "displayName": "Paraguay"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "628",
+        "abbreviation": "AUS",
+        "displayName": "Australia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760470",
+   "date": "2026-06-26T02:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "465",
+        "abbreviation": "TUR",
+        "displayName": "Türkiye"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "660",
+        "abbreviation": "USA",
+        "displayName": "United States"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760475",
+   "date": "2026-06-26T19:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760474",
+   "date": "2026-06-26T19:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "5",
+       "winner": true,
+       "team": {
+        "id": "654",
+        "abbreviation": "SEN",
+        "displayName": "Senegal"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "4375",
+        "abbreviation": "IRQ",
+        "displayName": "Iraq"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760478",
+   "date": "2026-06-27T00:00Z",
+   "status": {
+    "displayClock": "90'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2597",
+        "abbreviation": "CPV",
+        "displayName": "Cape Verde"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "655",
+        "abbreviation": "KSA",
+        "displayName": "Saudi Arabia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760479",
+   "date": "2026-06-27T00:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Akron",
+      "address": {
+       "city": "Guadalajara",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "212",
+        "abbreviation": "URU",
+        "displayName": "Uruguay"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760476",
+   "date": "2026-06-27T03:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2620",
+        "abbreviation": "EGY",
+        "displayName": "Egypt"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "469",
+        "abbreviation": "IRN",
+        "displayName": "Iran"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760477",
+   "date": "2026-06-27T03:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2666",
+        "abbreviation": "NZL",
+        "displayName": "New Zealand"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "5",
+       "winner": true,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760480",
+   "date": "2026-06-27T21:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "477",
+        "abbreviation": "CRO",
+        "displayName": "Croatia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4469",
+        "abbreviation": "GHA",
+        "displayName": "Ghana"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760485",
+   "date": "2026-06-27T21:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2659",
+        "abbreviation": "PAN",
+        "displayName": "Panama"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760481",
+   "date": "2026-06-27T23:30Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "208",
+        "abbreviation": "COL",
+        "displayName": "Colombia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "482",
+        "abbreviation": "POR",
+        "displayName": "Portugal"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760482",
+   "date": "2026-06-27T23:30Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "2850",
+        "abbreviation": "COD",
+        "displayName": "Congo DR"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2570",
+        "abbreviation": "UZB",
+        "displayName": "Uzbekistan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760484",
+   "date": "2026-06-28T02:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": false,
+       "team": {
+        "id": "624",
+        "abbreviation": "ALG",
+        "displayName": "Algeria"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": false,
+       "team": {
+        "id": "474",
+        "abbreviation": "AUT",
+        "displayName": "Austria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760483",
+   "date": "2026-06-28T02:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "group-stage"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2917",
+        "abbreviation": "JOR",
+        "displayName": "Jordan"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760486",
+   "date": "2026-06-28T19:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "467",
+        "abbreviation": "RSA",
+        "displayName": "South Africa"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "206",
+        "abbreviation": "CAN",
+        "displayName": "Canada"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760487",
+   "date": "2026-06-29T17:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "205",
+        "abbreviation": "BRA",
+        "displayName": "Brazil"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "627",
+        "abbreviation": "JPN",
+        "displayName": "Japan"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760489",
+   "date": "2026-06-29T20:30Z",
+   "status": {
+    "displayClock": "120'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT-Pens"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "481",
+        "abbreviation": "GER",
+        "displayName": "Germany"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "210",
+        "abbreviation": "PAR",
+        "displayName": "Paraguay"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760488",
+   "date": "2026-06-30T01:00Z",
+   "status": {
+    "displayClock": "120'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT-Pens"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio BBVA",
+      "address": {
+       "city": "Guadalupe",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "449",
+        "abbreviation": "NED",
+        "displayName": "Netherlands"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760490",
+   "date": "2026-06-30T17:00Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "4789",
+        "abbreviation": "CIV",
+        "displayName": "Ivory Coast"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760492",
+   "date": "2026-06-30T21:00Z",
+   "status": {
+    "displayClock": "90'+4'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "466",
+        "abbreviation": "SWE",
+        "displayName": "Sweden"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760491",
+   "date": "2026-07-01T02:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Banorte",
+      "address": {
+       "city": "Mexico City",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "203",
+        "abbreviation": "MEX",
+        "displayName": "Mexico"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "209",
+        "abbreviation": "ECU",
+        "displayName": "Ecuador"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760495",
+   "date": "2026-07-01T16:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "2850",
+        "abbreviation": "COD",
+        "displayName": "Congo DR"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760493",
+   "date": "2026-07-01T20:00Z",
+   "status": {
+    "displayClock": "120'+12'",
+    "type": {
+     "state": "post",
+     "shortDetail": "AET"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "654",
+        "abbreviation": "SEN",
+        "displayName": "Senegal"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760494",
+   "date": "2026-07-02T00:00Z",
+   "status": {
+    "displayClock": "90'+10'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Levi's Stadium",
+      "address": {
+       "city": "Santa Clara, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "660",
+        "abbreviation": "USA",
+        "displayName": "United States"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "452",
+        "abbreviation": "BIH",
+        "displayName": "Bosnia-Herzegovina"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760497",
+   "date": "2026-07-02T19:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "474",
+        "abbreviation": "AUT",
+        "displayName": "Austria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760496",
+   "date": "2026-07-02T23:00Z",
+   "status": {
+    "displayClock": "90'+19'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BMO Field",
+      "address": {
+       "city": "Toronto",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "482",
+        "abbreviation": "POR",
+        "displayName": "Portugal"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "477",
+        "abbreviation": "CRO",
+        "displayName": "Croatia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760498",
+   "date": "2026-07-03T03:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "624",
+        "abbreviation": "ALG",
+        "displayName": "Algeria"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760499",
+   "date": "2026-07-03T18:00Z",
+   "status": {
+    "displayClock": "120'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT-Pens"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "628",
+        "abbreviation": "AUS",
+        "displayName": "Australia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "2620",
+        "abbreviation": "EGY",
+        "displayName": "Egypt"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760500",
+   "date": "2026-07-03T22:00Z",
+   "status": {
+    "displayClock": "120'+3'",
+    "type": {
+     "state": "post",
+     "shortDetail": "AET"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "2597",
+        "abbreviation": "CPV",
+        "displayName": "Cape Verde"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760501",
+   "date": "2026-07-04T01:30Z",
+   "status": {
+    "displayClock": "90'+8'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-32"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "208",
+        "abbreviation": "COL",
+        "displayName": "Colombia"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "4469",
+        "abbreviation": "GHA",
+        "displayName": "Ghana"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760502",
+   "date": "2026-07-04T17:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "NRG Stadium",
+      "address": {
+       "city": "Houston, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "206",
+        "abbreviation": "CAN",
+        "displayName": "Canada"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760503",
+   "date": "2026-07-04T21:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lincoln Financial Field",
+      "address": {
+       "city": "Philadelphia, Pennsylvania",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "210",
+        "abbreviation": "PAR",
+        "displayName": "Paraguay"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760504",
+   "date": "2026-07-05T20:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "205",
+        "abbreviation": "BRA",
+        "displayName": "Brazil"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760505",
+   "date": "2026-07-06T01:00Z",
+   "status": {
+    "displayClock": "90'+12'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Estadio Banorte",
+      "address": {
+       "city": "Mexico City",
+       "country": "Mexico"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "203",
+        "abbreviation": "MEX",
+        "displayName": "Mexico"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760506",
+   "date": "2026-07-06T19:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "482",
+        "abbreviation": "POR",
+        "displayName": "Portugal"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760507",
+   "date": "2026-07-07T00:00Z",
+   "status": {
+    "displayClock": "90'+4'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Lumen Field",
+      "address": {
+       "city": "Seattle, Washington",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "660",
+        "abbreviation": "USA",
+        "displayName": "United States"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "4",
+       "winner": true,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760509",
+   "date": "2026-07-07T16:00Z",
+   "status": {
+    "displayClock": "90'+11'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": false,
+       "team": {
+        "id": "2620",
+        "abbreviation": "EGY",
+        "displayName": "Egypt"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760508",
+   "date": "2026-07-07T20:00Z",
+   "status": {
+    "displayClock": "120'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT-Pens"
+    }
+   },
+   "season": {
+    "slug": "round-of-16"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "BC Place",
+      "address": {
+       "city": "Vancouver",
+       "country": "Canada"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": true,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "208",
+        "abbreviation": "COL",
+        "displayName": "Colombia"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760510",
+   "date": "2026-07-09T20:00Z",
+   "status": {
+    "displayClock": "90'+6'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "quarterfinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Gillette Stadium",
+      "address": {
+       "city": "Foxborough, Massachusetts",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "2869",
+        "abbreviation": "MAR",
+        "displayName": "Morocco"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760511",
+   "date": "2026-07-10T19:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "quarterfinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "SoFi Stadium",
+      "address": {
+       "city": "Inglewood, California",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "459",
+        "abbreviation": "BEL",
+        "displayName": "Belgium"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760512",
+   "date": "2026-07-11T21:00Z",
+   "status": {
+    "displayClock": "120'+2'",
+    "type": {
+     "state": "post",
+     "shortDetail": "AET"
+    }
+   },
+   "season": {
+    "slug": "quarterfinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "464",
+        "abbreviation": "NOR",
+        "displayName": "Norway"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760513",
+   "date": "2026-07-12T01:00Z",
+   "status": {
+    "displayClock": "120'+4'",
+    "type": {
+     "state": "post",
+     "shortDetail": "AET"
+    }
+   },
+   "season": {
+    "slug": "quarterfinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "GEHA Field at Arrowhead Stadium",
+      "address": {
+       "city": "Kansas City, Missouri",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "3",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "475",
+        "abbreviation": "SUI",
+        "displayName": "Switzerland"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760514",
+   "date": "2026-07-14T19:00Z",
+   "status": {
+    "displayClock": "90'+7'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "semifinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "AT&T Stadium",
+      "address": {
+       "city": "Arlington, Texas",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760515",
+   "date": "2026-07-15T19:00Z",
+   "status": {
+    "displayClock": "90'+12'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "semifinals"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Mercedes-Benz Stadium",
+      "address": {
+       "city": "Atlanta, Georgia",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": false,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "2",
+       "winner": true,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760516",
+   "date": "2026-07-18T21:00Z",
+   "status": {
+    "displayClock": "90'+9'",
+    "type": {
+     "state": "post",
+     "shortDetail": "FT"
+    }
+   },
+   "season": {
+    "slug": "3rd-place-match"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "Hard Rock Stadium",
+      "address": {
+       "city": "Miami Gardens, Florida",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "4",
+       "winner": false,
+       "team": {
+        "id": "478",
+        "abbreviation": "FRA",
+        "displayName": "France"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "6",
+       "winner": true,
+       "team": {
+        "id": "448",
+        "abbreviation": "ENG",
+        "displayName": "England"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "760517",
+   "date": "2026-07-19T19:00Z",
+   "status": {
+    "displayClock": "120'+5'",
+    "type": {
+     "state": "post",
+     "shortDetail": "AET"
+    }
+   },
+   "season": {
+    "slug": "final"
+   },
+   "competitions": [
+    {
+     "venue": {
+      "fullName": "MetLife Stadium",
+      "address": {
+       "city": "East Rutherford, New Jersey",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "homeAway": "home",
+       "score": "1",
+       "winner": true,
+       "team": {
+        "id": "164",
+        "abbreviation": "ESP",
+        "displayName": "Spain"
+       }
+      },
+      {
+       "homeAway": "away",
+       "score": "0",
+       "winner": false,
+       "team": {
+        "id": "202",
+        "abbreviation": "ARG",
+        "displayName": "Argentina"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

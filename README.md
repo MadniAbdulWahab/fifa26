@@ -26,6 +26,13 @@ statuses, venues, goal events, and live commentary. The ESPN integration is
 isolated in `src/data/espn/` and `src/data/events/` so it can be replaced if the
 source changes.
 
+Since the tournament ended, ESPN no longer accepts the whole-tournament date
+range query, so the app serves every result from a bundled archive
+(`src/data/espn/archive/scoreboard-2026.json`). The same archive is the
+fallback whenever the live request fails. Regenerate it with
+`node scripts/archive-espn-scoreboard.mjs`, which collects the 104 fixtures one
+day at a time. Goal scorers and commentary still load per match from ESPN.
+
 There are also fallback data modes for development:
 
 - `espn`: live ESPN data, default.

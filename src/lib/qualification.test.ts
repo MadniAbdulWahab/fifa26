@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { GroupStandings, Match, Team } from '@/domain/types';
 import { buildStandings } from './standings';
-import { qualificationStatus } from './qualification';
+import { groupQualificationStatus, qualificationStatus } from './qualification';
 
 const teams: Team[] = [
   { id: 'a', name: 'Alpha', code: 'ALP', flag: '', rating: 1800 },
@@ -103,6 +103,10 @@ describe('qualificationStatus', () => {
       kind: 'eliminated',
       label: 'Eliminated in Round of 32',
     });
+    // The group table still shows that the team got out of its group.
+    expect(
+      groupQualificationStatus('a', matches, standings(groupMatches)),
+    ).toEqual({ kind: 'qualified', label: 'Qualified for knockouts' });
   });
 
   it('uses winnerId to eliminate a team after a tied knockout score', () => {

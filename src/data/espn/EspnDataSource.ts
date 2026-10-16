@@ -9,15 +9,9 @@ import type {
 import { SEED_TEAMS } from '@/data/static/teams';
 import { matchesTeam } from '@/data/events/teamNames';
 import { flagUrl } from '@/lib/flags';
-import type {
-  EspnApiEvent,
-  EspnApiTeam,
-  EspnScoreboardApiResponse,
-} from './espnApiTypes';
+import type { EspnApiEvent, EspnApiTeam } from './espnApiTypes';
+import { loadScoreboardEvents } from './scoreboard';
 
-const BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world';
-/** Whole-tournament window — one request returns all 104 fixtures. */
-const RANGE = '20260611-20260719';
 const DEFAULT_RATING = 1700;
 const SCOREBOARD_CACHE_MS = 45_000;
 
@@ -149,8 +143,9 @@ export function liveClockLabel(
 /**
  * Main data source backed by ESPN's public, key-less, CORS-enabled site API.
  * Fresher scores than football-data's free tier and needs no proxy/token — but
- * the API is undocumented, so all shape knowledge stays in this module and any
- * failure degrades to empty (handled by the app's loading/error states).
+ * the API is undocumented, so all shape knowledge stays in this module. After
+ * the tournament, or if the live request fails, the bundled results archive is
+ * used instead (see `./scoreboard`).
  */
 export class EspnDataSource implements DataSource {
   private scoreboard: Promise<EspnApiEvent[]> | null = null;
@@ -163,14 +158,7 @@ export class EspnDataSource implements DataSource {
       now - this.scoreboardFetchedAt > SCOREBOARD_CACHE_MS
     ) {
       this.scoreboardFetchedAt = now;
-      this.scoreboard = fetch(`${BASE}/scoreboard?dates=${RANGE}&limit=500`)
-        .then((r) =>
-          r.ok
-            ? (r.json() as Promise<EspnScoreboardApiResponse>)
-            : Promise.resolve({ events: [] }),
-        )
-        .then((d) => d.events ?? [])
-        .catch(() => []);
+      this.scoreboard = loadScoreboardEvents();
     }
     return this.scoreboard;
   }

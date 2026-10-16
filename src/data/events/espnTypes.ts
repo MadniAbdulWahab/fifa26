@@ -2,17 +2,13 @@
 
 export interface EspnCompetitor {
   homeAway: 'home' | 'away';
-  team: { displayName: string; abbreviation?: string };
+  team: { displayName?: string; abbreviation?: string };
 }
 
 export interface EspnScoreboardEvent {
   id: string;
   date: string; // ISO instant
   competitions: { competitors: EspnCompetitor[] }[];
-}
-
-export interface EspnScoreboardResponse {
-  events: EspnScoreboardEvent[] | null;
 }
 
 export interface EspnKeyEvent {

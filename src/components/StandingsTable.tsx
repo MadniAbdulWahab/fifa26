@@ -2,13 +2,13 @@ import type { ReactNode } from 'react';
 import type { GroupStandings } from '@/domain/types';
 import { useTournament } from '@/app/TournamentContext';
 import { formatPercent } from '@/lib/labels';
-import { qualificationStatus } from '@/lib/qualification';
+import { groupQualificationStatus } from '@/lib/qualification';
 import { TeamBadge } from './TeamBadge';
 
 export function StandingsTable({ group }: { group: GroupStandings }) {
   const { odds, matches, standings } = useTournament();
   const rows = group.rows.map((row) => {
-    const status = qualificationStatus(row.team.id, matches, standings);
+    const status = groupQualificationStatus(row.team.id, matches, standings);
     return {
       row,
       status,

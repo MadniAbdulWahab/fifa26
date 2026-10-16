@@ -9,13 +9,11 @@ import { matchesTeam } from './teamNames';
 import type {
   EspnKeyEvent,
   EspnScoreboardEvent,
-  EspnScoreboardResponse,
   EspnSummaryResponse,
 } from './espnTypes';
+import { loadScoreboardEvents } from '@/data/espn/scoreboard';
 
 const BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world';
-/** Whole-tournament window for the one-shot fixture index. */
-const RANGE = '20260611-20260719';
 
 /** UTC calendar date (YYYY-MM-DD) of an ISO instant, shifted by `dayOffset`. */
 function utcDateStr(iso: string, dayOffset = 0): string {
@@ -126,9 +124,7 @@ export class EspnEventsSource implements MatchEventsSource {
 
   private getIndex(): Promise<EspnScoreboardEvent[]> {
     if (!this.indexPromise) {
-      this.indexPromise = this.fetchJson<EspnScoreboardResponse>(
-        `${BASE}/scoreboard?dates=${RANGE}&limit=500`,
-      ).then((d) => d?.events ?? []);
+      this.indexPromise = loadScoreboardEvents();
     }
     return this.indexPromise;
   }

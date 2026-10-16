@@ -36,12 +36,19 @@ export function compareRecords(a: TeamRecord, b: TeamRecord): number {
   return b.goalsFor - a.goalsFor;
 }
 
-/** Build sorted standings for every group found in the match list. */
+/**
+ * Build sorted standings for every group found in the match list. Only
+ * group-stage results count, so knockout matches in the same list do not
+ * inflate a team's group record.
+ */
 export function buildStandings(
   teams: Team[],
   matches: Match[],
 ): GroupStandings[] {
-  const records = computeRecords(teams, matches);
+  const records = computeRecords(
+    teams,
+    matches.filter((m) => m.stage === 'group'),
+  );
   const teamGroup = groupByTeam(matches);
   const teamsById = new Map(teams.map((t) => [t.id, t]));
 

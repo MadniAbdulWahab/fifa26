@@ -11,9 +11,22 @@ export function qualificationStatus(
   matches: Match[],
   standings: GroupStandings[],
 ): QualificationStatus {
-  const knockoutStatus = knockoutQualificationStatus(teamId, matches);
-  if (knockoutStatus) return knockoutStatus;
+  return (
+    knockoutQualificationStatus(teamId, matches) ??
+    groupQualificationStatus(teamId, matches, standings)
+  );
+}
 
+/**
+ * Whether the team got out of its group, regardless of what happened in the
+ * knockouts. Used by the group tables, where a group winner knocked out later
+ * should still read as qualified rather than "Out".
+ */
+export function groupQualificationStatus(
+  teamId: TeamId,
+  matches: Match[],
+  standings: GroupStandings[],
+): QualificationStatus {
   if (
     matches.some(
       (match) =>
