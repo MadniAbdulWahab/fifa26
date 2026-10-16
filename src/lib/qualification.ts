@@ -63,6 +63,12 @@ export function groupQualificationStatus(
   return { kind: 'eliminated', label: 'Eliminated in group stage' };
 }
 
+/** The winner of the final once it has been played, otherwise null. */
+export function championId(matches: Match[]): TeamId | null {
+  const final = matches.find((match) => match.stage === 'final');
+  return final ? knockoutWinner(final) : null;
+}
+
 export function eliminatedTeamIds(matches: Match[]): Set<TeamId> {
   const eliminated = new Set<TeamId>();
   for (const match of matches) {

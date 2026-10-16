@@ -1,6 +1,6 @@
 import type { GroupId, Match, Team, TeamId } from '@/domain/types';
 import { expectedGoals, simulateScore } from './model';
-import { eliminatedTeamIds } from './qualification';
+import { championId, eliminatedTeamIds } from './qualification';
 import { mulberry32, poisson, type Rng } from './rng';
 
 /**
@@ -46,6 +46,7 @@ export function simulateAdvancement(
   const iterations = options.iterations ?? 2000;
   const rng = mulberry32(options.seed ?? 0xc0ffee);
   const eliminated = eliminatedTeamIds(matches);
+  const champion = championId(matches);
 
   const teamsById = new Map(teams.map((t) => [t.id, t]));
   const groupMatches = matches.filter((m) => m.stage === 'group' && m.group);
@@ -94,9 +95,14 @@ export function simulateAdvancement(
   for (const team of teams) {
     odds.set(team.id, {
       advanceFromGroup: (advanceCount.get(team.id) ?? 0) / iterations,
-      winTitle: eliminated.has(team.id)
-        ? 0
-        : (titleCount.get(team.id) ?? 0) / iterations,
+      // Once the final is played the title odds are settled, not simulated.
+      winTitle: champion
+        ? team.id === champion
+          ? 1
+          : 0
+        : eliminated.has(team.id)
+          ? 0
+          : (titleCount.get(team.id) ?? 0) / iterations,
     });
   }
   return odds;

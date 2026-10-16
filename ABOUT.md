@@ -25,6 +25,12 @@ It runs on **live data from ESPN's public API** by default (fresher scores, no
 account, no API key, no proxy); football-data.org and a bundled offline schedule
 are selectable alternatives.
 
+Since the tournament ended (19 July 2026) the fixtures, results, tables and
+bracket come from a bundled archive of all 104 results
+(`src/data/espn/archive/scoreboard-2026.json`), because ESPN no longer answers
+the whole-tournament date query. The archive is also the fallback whenever the
+live request fails; scorers and commentary still load per match from ESPN.
+
 ---
 
 ## 2. Features in detail

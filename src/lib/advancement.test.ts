@@ -79,4 +79,30 @@ describe('simulateAdvancement', () => {
 
     expect(odds.get('t1')!.winTitle).toBe(0);
   });
+
+  it('gives the champion certain title odds once the final is played', () => {
+    const { teams, matches } = clinchedGroup();
+    const odds = simulateAdvancement(
+      teams,
+      [
+        ...matches,
+        {
+          id: 'final',
+          stage: 'final',
+          kickoff: '2026-07-19T19:00:00Z',
+          status: 'finished',
+          homeId: 't3',
+          awayId: 't1',
+          homeGoals: 1,
+          awayGoals: 1,
+          winnerId: 't3',
+        },
+      ],
+      { iterations: 300, seed: 7 },
+    );
+
+    expect(odds.get('t3')!.winTitle).toBe(1);
+    expect(odds.get('t1')!.winTitle).toBe(0);
+    expect(odds.get('t2')!.winTitle).toBe(0);
+  });
 });

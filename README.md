@@ -1,101 +1,157 @@
-# World Cup 2026 Companion App
+# World Cup 2026 Companion
 
-An installable World Cup 2026 web app for following fixtures, live scores,
-group tables, match details, favorites, and knockout routes in one clean mobile
-experience.
+A mobile-first web app for the 2026 FIFA World Cup, the first with 48 teams.
+Fixtures in German time, live scores and scorers, group tables, the knockout
+bracket and Monte Carlo title odds, in one installable app.
 
-Live app: https://madniabdulwahab.github.io/fifa26/
+[![Live app](https://img.shields.io/badge/live%20app-open-16a34a?style=flat-square)](https://madniabdulwahab.github.io/fifa26/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/MadniAbdulWahab/fifa26/deploy.yml?branch=main&label=deploy&style=flat-square)](https://github.com/MadniAbdulWahab/fifa26/actions/workflows/deploy.yml)
+![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-56%20passing-16a34a?style=flat-square&logo=vitest&logoColor=white)
 
-## What It Does
+**[Open the app](https://madniabdulwahab.github.io/fifa26/)** on a phone or
+desktop. It can be installed to the home screen and keeps working offline.
 
-- Shows the full World Cup 2026 fixture list in German time.
-- Tracks live, upcoming, and finished matches.
-- Opens each fixture into a match page with score, scorers, events,
-  commentary when available, prediction, group context, and match info.
-- Shows group standings with qualification indicators.
-- Supports team favorites and kickoff reminders.
-- Includes a knockout bracket (official FIFA 2026 tree layout, with a compact
-  per-round view) and advancement/title odds.
-- Works as a PWA, so it can be added to the phone home screen.
-- Supports light and dark mode.
+> The tournament ended on 19 July 2026 with Spain beating Argentina 1–0 after
+> extra time. The app now shows the completed tournament, with every result,
+> the final group tables and the full bracket.
 
-## Data
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/fixtures.png" width="190" alt="Fixtures list with final scores"><br><sub>Fixtures</sub></td>
+    <td align="center"><img src="docs/screenshots/match.png" width="190" alt="Match page for the final with scorer and assist"><br><sub>Match page</sub></td>
+    <td align="center"><img src="docs/screenshots/standings.png" width="190" alt="Group tables with qualification markers"><br><sub>Group tables</sub></td>
+    <td align="center"><img src="docs/screenshots/bracket.png" width="190" alt="Semi-finals and final in the knockout bracket"><br><sub>Bracket</sub></td>
+  </tr>
+</table>
 
-The app uses ESPN's public football API by default for fixtures, scores,
-statuses, venues, goal events, and live commentary. The ESPN integration is
-isolated in `src/data/espn/` and `src/data/events/` so it can be replaced if the
-source changes.
+## Why I built it
 
-Since the tournament ended, ESPN no longer accepts the whole-tournament date
-range query, so the app serves every result from a bundled archive
-(`src/data/espn/archive/scoreboard-2026.json`). The same archive is the
-fallback whenever the live request fails. Regenerate it with
-`node scripts/archive-espn-scoreboard.mjs`, which collects the 104 fixtures one
-day at a time. Goal scorers and commentary still load per match from ESPN.
+I wanted to follow the 2026 World Cup from Germany without doing time-zone
+maths. The matches were played across the United States, Canada and Mexico, so
+many kickoffs fell late in the evening or at night German time, and it was easy
+to miss the games I cared about. It was also the first World Cup with 48 teams,
+where eight of the twelve third-placed teams go through, which makes the group
+tables much harder to read.
 
-There are also fallback data modes for development:
+So I built the app I wanted to use. Every kickoff is shown in German time,
+whatever time zone the device is set to. I mark my favorite teams once, and
+their matches are highlighted across the fixtures, so I can see at a glance
+when they play. The tables show who is through and who is still in the race
+for a best-third place. I designed and built the app myself, from the data
+layer to the interface, and shared it with friends, who used it to follow the
+tournament as well.
 
-- `espn`: live ESPN data, default.
-- `api`: football-data.org integration.
-- `static`: bundled offline schedule.
+## What it does
 
-## Tech Stack
+- **Fixtures** for all 104 matches, grouped by day and shown in German time for
+  every visitor.
+- **Match pages** with score, goal scorers and assists, live commentary, team
+  outlook and venue.
+- **Group tables** with points, goal difference and qualification markers,
+  including the race for the eight best third-placed teams.
+- **Knockout bracket** in the official 2026 layout, with a compact view per
+  round.
+- **Title and advancement odds** from a Monte Carlo simulation.
+- **Favorite teams** that are highlighted across the app, with kickoff
+  reminders while the app is open.
+- Light and dark mode, responsive navigation, installable as a PWA.
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- TanStack Query
-- React Router
-- Day.js
-- Vitest
-- vite-plugin-pwa
+## How I built it
 
-## Project Structure
+```mermaid
+flowchart LR
+  ESPN["ESPN scoreboard"] --> Loader["Scoreboard loader"]
+  Archive["Bundled results archive"] --> Loader
+  Loader --> DS["DataSource interface"]
+  FD["football-data.org"] --> DS
+  Static["Static schedule"] --> DS
+  DS --> Query["TanStack Query cache"]
+  Query --> Logic["Tournament logic<br>standings, qualification,<br>bracket, simulation"]
+  Logic --> UI["React pages"]
+  Summary["ESPN match summaries"] --> UI
+```
+
+**One data boundary, several providers.** ESPN's API is fast and needs no key
+but is undocumented, while football-data.org is documented but its free tier
+needs a token and a proxy, so I didn't want the app tied to either. I put every
+provider behind the
+same `DataSource` interface, which maps its responses into shared TypeScript
+domain types. ESPN, football-data.org and a bundled schedule can be swapped
+with one environment variable, and no UI code knows which one is active.
+
+**Keeping it working after the tournament.** After the final, the app suddenly
+showed no matches at all. I traced it to ESPN, which had started rejecting the
+whole-tournament date query while still answering single-day queries. I wrote
+a script (`scripts/archive-espn-scoreboard.mjs`) that collects all 104 results
+one day at a time, bundled the archive with the app, and made the app use it
+after the tournament or whenever the live request fails. Scorers and
+commentary still load per match from ESPN.
+
+**Tournament rules as pure functions.** I kept group tables, the best
+third-placed ranking, bracket seeding and qualification status in `src/lib/`
+with no React code, so I could test the rules directly instead of through the
+interface.
+
+**Odds you can reproduce.** For the title and advancement odds I wrote a small
+Monte Carlo simulation. It replays the remaining group games with a Poisson
+goal model based on team ratings, then plays out the bracket. It runs 2,000
+times with a seeded random number generator, so the same results always give
+the same odds. Once the final is played, the title odds are settled rather
+than simulated.
+
+**Quality checks.** 56 Vitest tests across 10 files cover the data mapping,
+the archive fallback, standings, qualification, bracket layout and the
+simulation. TypeScript runs in strict mode, ESLint checks every file, and
+GitHub Actions deploys `main` to GitHub Pages on every push.
+
+## Tech stack
+
+React 18 · TypeScript · Vite · Tailwind CSS · TanStack Query · React Router ·
+Day.js · Vitest · vite-plugin-pwa · GitHub Actions · GitHub Pages
+
+## Run it locally
+
+```bash
+npm install
+npm run dev      # development server
+npm test         # Vitest
+npm run build    # type-check and production build
+npm run lint
+```
+
+`VITE_DATA_SOURCE` selects the provider: `espn` (default), `api` for
+football-data.org (needs a token and a CORS proxy, see `proxy/`) or `static`.
+
+## Project structure
 
 ```text
 src/
   app/          App shell, navigation, providers
   components/   Reusable UI
-  data/         Data sources and API mapping
-  domain/       Core app types
+  data/         Data providers, API mapping and the results archive
+  domain/       Core types
   hooks/        React hooks
-  lib/          Pure tournament logic
+  lib/          Pure tournament logic (standings, bracket, simulation)
   pages/        Route pages
   stores/       Local observable state
-```
-
-## Development
-
-```bash
-npm install
-npm run dev
-```
-
-Useful scripts:
-
-```bash
-npm run build
-npm run lint
-npm test
-npm run format
-npm run icons
+scripts/        Results archive and icon generation
 ```
 
 ## Deployment
 
-The app is deployed to GitHub Pages from `main` using GitHub Actions.
+Every push to `main` builds the app and publishes it to GitHub Pages through
+`.github/workflows/deploy.yml`. Vite builds with the `/fifa26/` base path, the
+router reads it from `import.meta.env.BASE_URL`, and the workflow copies
+`index.html` to `404.html` so deep links such as `/fifa26/bracket` load
+directly.
 
-Important pieces:
-
-- `vite.config.ts` sets the `/fifa26/` base path for production.
-- `src/main.tsx` reads the router basename from `import.meta.env.BASE_URL`.
-- The deploy workflow copies `index.html` to `404.html` so direct route
-  refreshes work on GitHub Pages.
+For a full feature walkthrough, see [ABOUT.md](ABOUT.md).
 
 ## Ownership
 
 Copyright © Abdul Wahab Madni. All rights reserved.
 
-This is a personal app. No open-source license is granted unless one is added
-explicitly later.
+This is a personal project. No open-source license is granted unless one is
+added explicitly later.
