@@ -42,8 +42,7 @@ when they play. The tables show who is through and who is still in the race
 for a best-third place.
 
 I designed the app, decided what it should do and how it fits together, and
-wrote the code, using Claude Code as a coding assistant along the way. That is
-why Claude appears as a co-author on some commits. I shared the app with
+wrote the code, also used claude code for some functions and debugging. I shared the app with
 friends, who used it to follow the tournament as well.
 
 ## What it does
