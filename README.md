@@ -39,9 +39,12 @@ So I built the app I wanted to use. Every kickoff is shown in German time,
 whatever time zone the device is set to. I mark my favorite teams once, and
 their matches are highlighted across the fixtures, so I can see at a glance
 when they play. The tables show who is through and who is still in the race
-for a best-third place. I designed and built the app myself, from the data
-layer to the interface, and shared it with friends, who used it to follow the
-tournament as well.
+for a best-third place.
+
+I designed the app and decided what it should do and how it fits together. I
+built it with Claude Code as an AI coding assistant, which is why Claude
+appears as a co-author on some commits. I shared it with friends, who used it
+to follow the tournament as well.
 
 ## What it does
 
