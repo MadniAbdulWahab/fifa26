@@ -16,8 +16,8 @@ export function isFinished(match: Match): boolean {
  * Whether a match is in progress *right now*.
  *
  * Trusts an explicit `live` status (the live API sets this), and also treats a
- * not-yet-finished match as live when the clock falls inside its kickoff window
- * — so sample fixtures light up during their real time slot without faking a
+ * not-yet-finished match as live when the clock falls inside its kickoff window,
+ * so sample fixtures light up during their real time slot without faking a
  * score.
  */
 export function isLiveNow(match: Match, now: number = Date.now()): boolean {

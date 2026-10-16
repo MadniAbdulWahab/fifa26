@@ -1,4 +1,4 @@
-# About — World Cup 2026 companion app
+# About the World Cup 2026 companion app
 
 A complete description of what this app is, what it does, and how every part of
 it works. For setup/commands see [README.md](README.md); for an AI-oriented
@@ -8,16 +8,16 @@ codebase map see [CLAUDE.md](CLAUDE.md).
 
 ## 1. What it is
 
-A **Progressive Web App (PWA)** that follows the FIFA World Cup 2026 — the first
+A **Progressive Web App (PWA)** that follows the FIFA World Cup 2026, the first
 48-team tournament (12 groups of 4, then a 32-team knockout). It runs in any
 modern browser on phone or desktop and can be installed to the home screen.
 
 It was built to answer four questions at a glance:
 
-1. **When and where is each match?** — in **German time (CET/CEST)**.
-2. **How is each team doing?** — wins, draws, losses, goals, points.
-3. **What are a team's chances of going through?** — and of winning it all.
-4. **What does the knockout path look like?** — an auto-seeding bracket.
+1. **When and where is each match?** Shown in **German time (CET/CEST)**.
+2. **How is each team doing?** Wins, draws, losses, goals and points.
+3. **What are a team's chances of going through,** and of winning it all?
+4. **What does the knockout path look like?** An auto-seeding bracket shows it.
 
 …plus the ability to follow favorite teams and get kickoff reminders.
 
@@ -67,7 +67,7 @@ live request fails; scorers and commentary still load per match from ESPN.
   tab with live play-by-play text. These come from a **separate free overlay**,
   fetched per match (and re-polled while live), because football-data.org's free
   tier omits scorers. Default is **ESPN's public API** (complete scorers + full
-  commentary, no key/proxy — but undocumented); an alternative **TheSportsDB**
+  commentary, no key or proxy, but undocumented); an alternative **TheSportsDB**
   source has only partial goals and no commentary, in which case a **"Partial
   data"** badge is shown.
 - Tap a team to open its full team page.
@@ -93,7 +93,7 @@ live request fails; scorers and commentary still load per match from ESPN.
   4. Seed and play out a single-elimination bracket to a champion.
 - Thousands of runs are aggregated into percentages. The randomness is
   **seeded/deterministic**, so the numbers are stable across reloads and
-  reproducible in tests. It is an approximation for fun — not betting advice.
+  reproducible in tests. It is an approximation for fun, not betting advice.
 
 ### Knockout bracket
 
@@ -105,7 +105,7 @@ live request fails; scorers and commentary still load per match from ESPN.
   seeds it from the group standings into the official bracket slots. Later rounds
   show "TBD" until results decide them.
 - The round buttons (R32 / R16 / QF / SF / Final) jump to a round and switch to a
-  **compact view** — every round top-aligned with tight gaps — so a round is easy
+  **compact view**, with every round top-aligned and tight gaps, so a round is easy
   to scan without the tall tree. A **Tree / Compact** toggle switches back to the
   full aligned bracket.
 - A **Title contenders** panel ranks teams by simulated trophy odds.
@@ -113,7 +113,7 @@ live request fails; scorers and commentary still load per match from ESPN.
 ### Favorites & reminders
 
 - Tap the ☆ on any team to follow it. Favorites are saved in `localStorage`
-  (**device-local** — no accounts/backend, so they don't sync across devices).
+  (**device-local**, with no accounts or backend, so they don't sync across devices).
 - The Favorites page shows each followed team's record, advancement bar and next
   match, and a button to **enable kickoff reminders** (browser notifications a
   few minutes before kickoff while the app is open). Once qualification is
@@ -127,7 +127,7 @@ live request fails; scorers and commentary still load per match from ESPN.
 ### Polish
 
 - Mobile-first layout: bottom tab bar on phones, top nav on desktop.
-- **Real country flags** (flag images via flagcdn, cached for offline) — emoji
+- **Real country flags** (flag images via flagcdn, cached for offline). Emoji
   flags don't render on Windows, so images are used everywhere.
 - **Light/dark mode** toggle (persisted).
 - Installable PWA with offline caching via a service worker.
@@ -173,7 +173,7 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
 
 ### Data sources (`VITE_DATA_SOURCE`)
 
-- **ESPN (default, `espn`):** ESPN's public site API (`fifa.world`) — fresher
+- **ESPN (default, `espn`):** ESPN's public site API (`fifa.world`), with fresher
   scores, **key-less + CORS, so no token or proxy** in dev or production. ESPN
   supplies live ids/scores/schedule/stage; the bundled `SEED_TEAMS` supplies FIFA
   codes/flags/ratings and the group letter (ESPN doesn't tag groups). Undocumented
@@ -181,7 +181,7 @@ app     → shell, nav, TournamentContext (loads + derives all data once)
 - **football-data.org (`api`):** competition `WC` real fixtures/results. In dev,
   Vite proxies to avoid CORS; production needs the `proxy/` Cloudflare Worker so
   the token never ships to the browser (see README). Free tier has no scorers.
-- **Static (offline, `static`):** bundled fixture data — 48 teams in 12 groups and
+- **Static (offline, `static`):** bundled fixture data with 48 teams in 12 groups and
   a group-stage pairing schedule. Fully offline and deterministic, but no scores.
 - **Match-feed overlay:** supplies per-match goal scorers + live commentary on
   the match page, since football-data's free tier omits them. Lives in

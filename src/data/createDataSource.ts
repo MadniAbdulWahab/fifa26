@@ -6,7 +6,7 @@ import { StaticDataSource } from './static/StaticDataSource';
 
 /**
  * Single place that decides which backend the app talks to. Swap the data
- * layer by changing VITE_DATA_SOURCE — no UI code needs to change.
+ * layer by changing VITE_DATA_SOURCE; no UI code needs to change.
  */
 export function createDataSource(): DataSource {
   switch (config.dataSource) {

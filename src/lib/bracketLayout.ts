@@ -5,7 +5,7 @@ import { isSeedRef, OFFICIAL_R32_SLOTS, TBD_TEAM_ID } from './bracket';
  * Visual layout of the knockout bracket.
  *
  * The Bracket page only "lines up like the actual tournament" if every knockout
- * match knows its **slot** — its top-to-bottom position within its round, taken
+ * match knows its **slot**, its top-to-bottom position within its round, taken
  * from the official FIFA 2026 bracket tree rather than from kickoff time.
  *
  * The tree topology is regular: round N+1 slot `s` is fed by round N slots `2s`

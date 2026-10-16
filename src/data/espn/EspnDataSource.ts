@@ -142,7 +142,7 @@ export function liveClockLabel(
 
 /**
  * Main data source backed by ESPN's public, key-less, CORS-enabled site API.
- * Fresher scores than football-data's free tier and needs no proxy/token — but
+ * Fresher scores than football-data's free tier and needs no proxy/token, but
  * the API is undocumented, so all shape knowledge stays in this module. After
  * the tournament, or if the live request fails, the bundled results archive is
  * used instead (see `./scoreboard`).

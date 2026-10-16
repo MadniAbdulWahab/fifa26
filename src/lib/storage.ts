@@ -13,6 +13,6 @@ export function writeJson<T>(key: string, value: T): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    // Storage full or unavailable (e.g. private mode) — ignore.
+    // Storage full or unavailable (e.g. private mode); ignore.
   }
 }

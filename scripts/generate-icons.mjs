@@ -12,8 +12,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = join(__dirname, '..', 'public');
 
 const WHITE = [255, 255, 255];
-const DARK = [15, 23, 42]; // #0f172a — ball spots + rim
-const GREEN = [22, 163, 74]; // #16a34a — pitch background
+const DARK = [15, 23, 42]; // #0f172a: ball spots + rim
+const GREEN = [22, 163, 74]; // #16a34a: pitch background
 const GREEN_DARK = [13, 110, 50]; // edge shading
 
 function crc32(buf) {

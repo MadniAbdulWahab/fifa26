@@ -91,7 +91,7 @@ describe('mapEspnGoals', () => {
   it('maps scorer/assist/minute and assigns the right side', () => {
     const keyEvents: EspnKeyEvent[] = [
       goal({
-        // Header: not typed "goal" but flagged scoringPlay — must still count.
+        // Header: not typed "goal" but flagged scoringPlay, so it must still count.
         type: { type: 'goal---header', text: 'Goal - Header' },
         team: { displayName: 'South Korea' },
         clock: { displayValue: "10'" },

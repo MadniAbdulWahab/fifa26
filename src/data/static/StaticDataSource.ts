@@ -8,7 +8,7 @@ import { SEED_TEAMS } from './teams';
 
 /**
  * Offline data source backed by bundled fixture data. Needs no API key, works
- * offline, and is deterministic — ideal for development and demos.
+ * offline, and is deterministic, which makes it ideal for development and demos.
  *
  * Group matches are scheduled only. Knockout fixtures remain placeholders until
  * real group results are supplied by a live feed or maintained results file.

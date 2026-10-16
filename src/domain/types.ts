@@ -76,7 +76,7 @@ export interface MatchEvent {
 /** A single line of play-by-play text commentary for a match. */
 export interface CommentaryEntry {
   id: string;
-  /** Match minute, e.g. "23'" — may be empty for non-timed lines (kickoff etc). */
+  /** Match minute, e.g. "23'". May be empty for non-timed lines (kickoff etc). */
   minute?: string;
   text: string;
 }

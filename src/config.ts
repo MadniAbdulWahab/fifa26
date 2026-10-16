@@ -2,7 +2,7 @@
 
 /**
  * Main data source:
- * - `espn`   (default) ESPN's public site API — fresher scores, key-less + CORS
+ * - `espn`   (default) ESPN's public site API: fresher scores, key-less + CORS
  *            (no proxy), but undocumented.
  * - `api`    football-data.org (needs a token + a CORS proxy in production).
  * - `static` bundled offline fixture schedule (no scores).
@@ -14,9 +14,9 @@ export type DataSourceKind = 'espn' | 'api' | 'static';
  * for a single match, since football-data.org's free tier omits them. `none`
  * disables the feature.
  *
- * - `espn`        — ESPN's public site API: complete scorers + commentary,
- *                   key-less and CORS-enabled (no proxy), but undocumented.
- * - `thesportsdb` — documented/sanctioned but often-partial goal timelines.
+ * - `espn`        ESPN's public site API with complete scorers + commentary,
+ *                  key-less and CORS-enabled (no proxy), but undocumented.
+ * - `thesportsdb` documented/sanctioned but often-partial goal timelines.
  */
 export type EventsSourceKind = 'espn' | 'thesportsdb' | 'none';
 
@@ -53,7 +53,7 @@ export const config: AppConfig = {
     baseUrl: import.meta.env.VITE_FOOTBALL_DATA_BASE ?? '/football-data',
     token: import.meta.env.VITE_FOOTBALL_DATA_TOKEN ?? '',
   },
-  // Default ESPN (complete scorers + live commentary, key-less, CORS, no proxy —
+  // Default ESPN (complete scorers + live commentary, key-less, CORS, no proxy,
   // but undocumented). `thesportsdb` is the documented fallback; `none` disables.
   eventsSource: readEventsSource(import.meta.env.VITE_EVENTS_SOURCE),
   theSportsDb: {

@@ -6,7 +6,7 @@ import { poisson, type Rng } from './rng';
  * advancement simulation, so both speak the same statistical language.
  *
  * Expected goals scale with the rating gap between the two sides. It is a
- * deliberate approximation — good enough to make odds feel reasonable, not a
+ * deliberate approximation, good enough to make odds feel reasonable but not a
  * betting model.
  */
 const BASE_GOALS = 1.35;

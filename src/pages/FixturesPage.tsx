@@ -25,7 +25,7 @@ export function FixturesPage() {
 
   return (
     <div className="space-y-4">
-      {/* Sticky filter bar — pinned directly under the nav (no travel). */}
+      {/* Sticky filter bar, pinned directly under the nav (no travel). */}
       <div className="sticky top-14 z-10 -mx-4 -mt-4 flex items-center gap-2 border-b border-slate-200 bg-slate-50/95 px-4 py-2 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
         <Segmented tab={tab} onChange={setTab} />
         <button
@@ -273,7 +273,7 @@ const savedScrollByView = new Map<string, number>();
 
 /**
  * Returns a ref to attach to the anchor element. The **first** time a view
- * (keyed by `viewKey`) is shown in a session, it places the scroll — to the
+ * (keyed by `viewKey`) is shown in a session, it places the scroll, either to the
  * anchor match, or to the top when `toTop` is set. On later visits (e.g. after
  * opening a match and coming back) it **restores the previous scroll position**
  * instead of jerking back to the current match. Won't re-fire on background

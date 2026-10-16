@@ -48,44 +48,44 @@ export function isSeedRef(seed: SlotSeed): seed is SeedRef {
 /**
  * The 16 Round-of-32 matches in official top-to-bottom bracket order
  * (FIFA World Cup 2026, matches 73–88). The order is chosen so adjacent slots
- * feed the same Round-of-16 match — (73,75)(77,79)(74,76)(78,80)(81,83)(85,86)
- * (82,84)(87,88) — so the whole bracket lines up as a connected tree where each
+ * feed the same Round-of-16 match, (73,75)(77,79)(74,76)(78,80)(81,83)(85,86)
+ * (82,84)(87,88), so the whole bracket lines up as a connected tree where each
  * later round follows by `slot = floor(feederSlot / 2)`.
  *
  * Source: FIFA / Wikipedia "2026 FIFA World Cup knockout stage".
  */
 export const OFFICIAL_R32_SLOTS: R32Slot[] = [
-  // slot 0 — M73
+  // slot 0: M73
   { home: { group: 'A', position: 2 }, away: { group: 'B', position: 2 } },
-  // slot 1 — M75
+  // slot 1: M75
   { home: { group: 'F', position: 1 }, away: { group: 'C', position: 2 } },
-  // slot 2 — M77
+  // slot 2: M77
   { home: { group: 'I', position: 1 }, away: { thirdOf: ['C', 'D', 'F', 'G', 'H'] } },
-  // slot 3 — M79
+  // slot 3: M79
   { home: { group: 'A', position: 1 }, away: { thirdOf: ['C', 'E', 'F', 'H', 'I'] } },
-  // slot 4 — M74
+  // slot 4: M74
   { home: { group: 'E', position: 1 }, away: { thirdOf: ['A', 'B', 'C', 'D', 'F'] } },
-  // slot 5 — M76
+  // slot 5: M76
   { home: { group: 'C', position: 1 }, away: { group: 'F', position: 2 } },
-  // slot 6 — M78
+  // slot 6: M78
   { home: { group: 'E', position: 2 }, away: { group: 'I', position: 2 } },
-  // slot 7 — M80
+  // slot 7: M80
   { home: { group: 'L', position: 1 }, away: { thirdOf: ['E', 'H', 'I', 'J', 'K'] } },
-  // slot 8 — M81
+  // slot 8: M81
   { home: { group: 'D', position: 1 }, away: { thirdOf: ['B', 'E', 'F', 'I', 'J'] } },
-  // slot 9 — M83
+  // slot 9: M83
   { home: { group: 'K', position: 2 }, away: { group: 'L', position: 2 } },
-  // slot 10 — M85
+  // slot 10: M85
   { home: { group: 'B', position: 1 }, away: { thirdOf: ['E', 'F', 'G', 'I', 'J'] } },
-  // slot 11 — M86
+  // slot 11: M86
   { home: { group: 'J', position: 1 }, away: { group: 'H', position: 2 } },
-  // slot 12 — M82
+  // slot 12: M82
   { home: { group: 'G', position: 1 }, away: { thirdOf: ['A', 'E', 'H', 'I', 'J'] } },
-  // slot 13 — M84
+  // slot 13: M84
   { home: { group: 'H', position: 1 }, away: { group: 'J', position: 2 } },
-  // slot 14 — M87
+  // slot 14: M87
   { home: { group: 'K', position: 1 }, away: { thirdOf: ['D', 'E', 'I', 'J', 'L'] } },
-  // slot 15 — M88
+  // slot 15: M88
   { home: { group: 'D', position: 2 }, away: { group: 'G', position: 2 } },
 ];
 
@@ -164,8 +164,8 @@ function qualifiedThirds(standings: GroupStandings[]): ThirdEntry[] {
  *
  * The 32 qualifiers are placed into the official FIFA 2026 Round-of-32 slots
  * (`OFFICIAL_R32_SLOTS`, top-to-bottom) so the bracket lines up like the real
- * tournament. Best-third opponents are assigned greedily — the strongest
- * available third from an allowed group — a reasonable stand-in for FIFA's
+ * tournament. Best-third opponents are assigned greedily (the strongest
+ * available third from an allowed group), a reasonable stand-in for FIFA's
  * published allocation table. Later rounds are created as "to be decided" until
  * results arrive.
  */
@@ -182,7 +182,7 @@ export function buildKnockoutMatches(standings: GroupStandings[]): Match[] {
 
   const seeds = seedQualifiers(standings);
   if (seeds.length < 32) {
-    // Group stage not complete yet — show an empty Round of 32.
+    // Group stage not complete yet, so show an empty Round of 32.
     for (let i = 0; i < 16; i++) matches.push(tbdMatch('round-of-32', i));
     return matches;
   }
