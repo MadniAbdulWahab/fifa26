@@ -1,11 +1,16 @@
 import { useMemo } from 'react';
 import { useTournament } from '@/app/TournamentContext';
+import { championId } from '@/lib/qualification';
 import { OddsBar } from './OddsBar';
 import { TeamBadge } from './TeamBadge';
 
-/** Top contenders ranked by simulated probability of winning the trophy. */
+/**
+ * Top contenders ranked by simulated probability of winning the trophy. Once
+ * the final has been played it shows the champion instead.
+ */
 export function TitleOdds({ limit = 10 }: { limit?: number }) {
-  const { teams, odds } = useTournament();
+  const { teams, odds, matches } = useTournament();
+  const champion = championId(matches);
 
   const ranked = useMemo(() => {
     return teams
@@ -19,7 +24,9 @@ export function TitleOdds({ limit = 10 }: { limit?: number }) {
 
   return (
     <section className="card p-4">
-      <h2 className="mb-3 font-bold">🏆 Title contenders</h2>
+      <h2 className="mb-3 font-bold">
+        🏆 {champion ? 'World champion' : 'Title contenders'}
+      </h2>
       <ul className="space-y-3">
         {ranked.map(({ team, win }) => (
           <li key={team.id} className="flex items-center gap-3">
@@ -36,7 +43,9 @@ export function TitleOdds({ limit = 10 }: { limit?: number }) {
         ))}
       </ul>
       <p className="mt-3 text-xs text-slate-400">
-        Estimated by Monte Carlo simulation — for fun, not betting advice.
+        {champion
+          ? 'Decided by the result of the final.'
+          : 'Estimated by Monte Carlo simulation. Just for fun, not betting advice.'}
       </p>
     </section>
   );

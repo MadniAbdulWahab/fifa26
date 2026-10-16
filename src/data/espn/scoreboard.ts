@@ -1,7 +1,7 @@
 import type { EspnApiEvent, EspnScoreboardApiResponse } from './espnApiTypes';
 
 const BASE = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world';
-/** Whole-tournament window — one request returns all 104 fixtures. */
+/** Whole-tournament window, so one request returns all 104 fixtures. */
 const RANGE = '20260611-20260719';
 
 /**
